@@ -21,7 +21,7 @@
  * reach 1.
  *
  * From: Wikipedia "http://en.wikipedia.org/wiki/Hailstone_number"
- */
+*/
 
 n = $0;
 

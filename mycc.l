@@ -4,6 +4,8 @@
 %option yylineno
 %option nounistd
 
+%x COMMENTS
+
 %{
 
 #include "global.h"
@@ -21,22 +23,34 @@ static int install_str();
 
 %}
 
+quote	\'
+ditto	\"
+back	\\
 digit           [0-9]
 alpha           [a-zA-Z_]
 id              {alpha}({alpha}|{digit})*
+hex		  [{digit}a-zA-Z]
+exp		  [eE][+-]{digit}+
 int             {digit}+
+ch		  [^\n\'"]
+EN 		  [\r\n]  
+SP 		[ \t\r\n]
 
 %%
 
 [ \t\v\n\f\r]                  /* skip white space */
-___                            /* <== TO BE COMPLETED: ignore inline and multiline comments */
+"//".*{EN}+      			  
+"/*".*."*/"
+<COMMENTS>"*/"{SP}*       { BEGIN INITIAL; }  
+<COMMENTS>.|{SP}     
+"/*"             		  { BEGIN COMMENTS; }  
 {id}                           { return install_id(); }
 {int}                          { return install_int(); }
-___                            { /* <== TO BE COMPLETED */ return install_oct(); }
-___                            { /* <== TO BE COMPLETED */ return install_hex(); }
-___                            { /* <== TO BE COMPLETED */ return install_chr(); }
-___                            { /* <== TO BE COMPLETED */ return install_fp(); }
-___                            { /* <== TO BE COMPLETED */ return install_str(); }
+0({digit})+                    {  return install_oct(); }
+0(x|X).*{hex}+                   {  return install_hex(); }
+{quote}({back}{ch}|{back}{back}|{back}{quote}|{back}{ditto}|{ch}|{ditto})*{quote}                        {  return install_chr(); }
+{digit}*.{digit}*({exp})       {  return install_fp(); }
+{ditto}({back}{ch}|{back}{back}|{back}{quote}|{back}{ditto}|{ch}|{quote})*{ditto} {  return install_str(); }
 "+="                           { return PA; }
 "-="                           { return NA; }
 "*="                           { return TA; }
@@ -77,7 +91,6 @@ static int install_id()
 		yylval.sym = insert(yytext, ID);
 		yylval.sym->localvar = localvar++;
 	}
-
 	return yylval.sym->token;
 }
 
@@ -127,7 +140,8 @@ static int install_hex()
 static int install_chr()
 {
 	/* TODO: TO BE COMPLETED */
-
+	sscanf(yytext[1], "%c", &yylval.num);
+	
 	return INT8;
 }
 
@@ -135,6 +149,7 @@ static int install_chr()
 static int install_fp()
 {
 	/* TODO: TO BE COMPLETED */
+	sscanf(yytext, "%f", &yylval.flt);
 
 	return FLT;
 }
@@ -143,6 +158,7 @@ static int install_fp()
 static int install_str()
 {
 	/* TODO: TO BE COMPLETED */
+	strcpy(yylval.str, yytext);
 
 	return STR;
 }
