@@ -6,64 +6,65 @@
    3  stmt : ';'
    4       | expr ';'
    5       | IF '(' expr M ')' stmt N ELSE L stmt L
-   6       | WHILE '(' L expr M ')' stmt N L
-   7       | DO stmt WHILE '(' expr ')' ';'
-   8       | FOR '(' expr ';' expr ';' expr ')' stmt
-   9       | RETURN expr ';'
-  10       | '{' stmts '}'
-  11       | error ';'
+   6       | IF '(' expr M ')' stmt L
+   7       | WHILE '(' L expr M ')' stmt N L
+   8       | DO L stmt WHILE '(' expr M N L ')' ';'
+   9       | FOR '(' expr ';' L expr M N ';' L expr N ')' L stmt N L
+  10       | RETURN expr ';'
+  11       | '{' stmts '}'
+  12       | error ';'
 
-  12  expr : ID '=' expr
-  13       | ID PA expr
-  14       | ID NA expr
-  15       | ID TA expr
-  16       | ID DA expr
-  17       | ID MA expr
-  18       | ID AA expr
-  19       | ID XA expr
-  20       | ID OA expr
-  21       | ID LA expr
-  22       | ID RA expr
-  23       | expr OR expr
-  24       | expr AN expr
-  25       | expr '|' expr
-  26       | expr '^' expr
-  27       | expr '&' expr
-  28       | expr EQ expr
-  29       | expr NE expr
-  30       | expr '<' expr
-  31       | expr '>' expr
-  32       | expr LE expr
-  33       | expr GE expr
-  34       | expr LS expr
-  35       | expr RS expr
-  36       | expr '+' expr
-  37       | expr '-' expr
-  38       | expr '*' expr
-  39       | expr '/' expr
-  40       | expr '%' expr
-  41       | '!' expr
-  42       | '~' expr
-  43       | '+' expr
-  44       | '-' expr
-  45       | '(' expr ')'
-  46       | '$' INT8
-  47       | PP ID
-  48       | NN ID
-  49       | ID PP
-  50       | ID NN
-  51       | ID
-  52       | INT8
-  53       | INT16
-  54       | INT32
-  55       | FLT
-  56       | STR
+  13  expr : ID '=' expr
+  14       | ID PA expr
+  15       | ID NA expr
+  16       | ID TA expr
+  17       | ID DA expr
+  18       | ID MA expr
+  19       | ID AA expr
+  20       | ID XA expr
+  21       | ID OA expr
+  22       | ID LA expr
+  23       | ID RA expr
+  24       | expr OR expr
+  25       | expr AN expr
+  26       | expr '|' expr
+  27       | expr '^' expr
+  28       | expr '&' expr
+  29       | expr EQ expr
+  30       | expr NE expr
+  31       | expr '<' expr
+  32       | expr '>' expr
+  33       | expr LE expr
+  34       | expr GE expr
+  35       | expr LS expr
+  36       | expr RS expr
+  37       | expr '+' expr
+  38       | expr '-' expr
+  39       | expr '*' expr
+  40       | expr '/' expr
+  41       | expr '%' expr
+  42       | '!' expr
+  43       | '~' expr
+  44       | '+' expr
+  45       | '-' expr
+  46       | '(' expr ')'
+  47       | '$' INT8
+  48       | PP ID
+  49       | NN ID
+  50       | ID PP
+  51       | ID NN
+  52       | ID
+  53       | INT8
+  54       | INT16
+  55       | INT32
+  56       | FLT
+  57       | STR
 
-  57  L :
+  58  L :
 
-  58  M :
+  59  M :
 
-  59  N :
+  60  N :
 
 state 0
 	$accept : . stmts $end  (0)
@@ -108,27 +109,27 @@ state 1
 
 
 state 2
-	stmt : error . ';'  (11)
+	stmt : error . ';'  (12)
 
 	';'  shift 26
 	.  error
 
 
 state 3
-	expr : ID . '=' expr  (12)
-	expr : ID . PA expr  (13)
-	expr : ID . NA expr  (14)
-	expr : ID . TA expr  (15)
-	expr : ID . DA expr  (16)
-	expr : ID . MA expr  (17)
-	expr : ID . AA expr  (18)
-	expr : ID . XA expr  (19)
-	expr : ID . OA expr  (20)
-	expr : ID . LA expr  (21)
-	expr : ID . RA expr  (22)
-	expr : ID . PP  (49)
-	expr : ID . NN  (50)
-	expr : ID .  (51)
+	expr : ID . '=' expr  (13)
+	expr : ID . PA expr  (14)
+	expr : ID . NA expr  (15)
+	expr : ID . TA expr  (16)
+	expr : ID . DA expr  (17)
+	expr : ID . MA expr  (18)
+	expr : ID . AA expr  (19)
+	expr : ID . XA expr  (20)
+	expr : ID . OA expr  (21)
+	expr : ID . LA expr  (22)
+	expr : ID . RA expr  (23)
+	expr : ID . PP  (50)
+	expr : ID . NN  (51)
+	expr : ID .  (52)
 
 	PA  shift 27
 	NA  shift 28
@@ -143,91 +144,69 @@ state 3
 	PP  shift 37
 	NN  shift 38
 	'='  shift 39
-	OR  reduce 51
-	AN  reduce 51
-	EQ  reduce 51
-	NE  reduce 51
-	LE  reduce 51
-	GE  reduce 51
-	LS  reduce 51
-	RS  reduce 51
-	'&'  reduce 51
-	'|'  reduce 51
-	'+'  reduce 51
-	'-'  reduce 51
-	'*'  reduce 51
-	'/'  reduce 51
-	';'  reduce 51
-	')'  reduce 51
-	'^'  reduce 51
-	'<'  reduce 51
-	'>'  reduce 51
-	'%'  reduce 51
+	OR  reduce 52
+	AN  reduce 52
+	EQ  reduce 52
+	NE  reduce 52
+	LE  reduce 52
+	GE  reduce 52
+	LS  reduce 52
+	RS  reduce 52
+	'&'  reduce 52
+	'|'  reduce 52
+	'+'  reduce 52
+	'-'  reduce 52
+	'*'  reduce 52
+	'/'  reduce 52
+	';'  reduce 52
+	')'  reduce 52
+	'^'  reduce 52
+	'<'  reduce 52
+	'>'  reduce 52
+	'%'  reduce 52
 
 
 state 4
-	expr : INT8 .  (52)
-
-	.  reduce 52
-
-
-state 5
-	expr : INT16 .  (53)
+	expr : INT8 .  (53)
 
 	.  reduce 53
 
 
-state 6
-	expr : INT32 .  (54)
+state 5
+	expr : INT16 .  (54)
 
 	.  reduce 54
 
 
-state 7
-	expr : FLT .  (55)
+state 6
+	expr : INT32 .  (55)
 
 	.  reduce 55
 
 
-state 8
-	expr : STR .  (56)
+state 7
+	expr : FLT .  (56)
 
 	.  reduce 56
 
 
+state 8
+	expr : STR .  (57)
+
+	.  reduce 57
+
+
 state 9
-	stmt : DO . stmt WHILE '(' expr ')' ';'  (7)
+	stmt : DO . L stmt WHILE '(' expr M N L ')' ';'  (8)
+	L : .  (58)
 
-	error  shift 2
-	ID  shift 3
-	INT8  shift 4
-	INT16  shift 5
-	INT32  shift 6
-	FLT  shift 7
-	STR  shift 8
-	DO  shift 9
-	FOR  shift 10
-	IF  shift 11
-	RETURN  shift 12
-	WHILE  shift 13
-	PP  shift 14
-	NN  shift 15
-	'+'  shift 16
-	'-'  shift 17
-	'!'  shift 18
-	';'  shift 19
-	'('  shift 20
-	'{'  shift 21
-	'~'  shift 22
-	'$'  shift 23
-	.  error
+	.  reduce 58
 
-	stmt  goto 40
-	expr  goto 25
+	L  goto 40
 
 
 state 10
-	stmt : FOR . '(' expr ';' expr ';' expr ')' stmt  (8)
+	stmt : FOR . '(' expr ';' L expr M N ';' L expr N ')' L stmt N L  (9)
 
 	'('  shift 41
 	.  error
@@ -235,13 +214,14 @@ state 10
 
 state 11
 	stmt : IF . '(' expr M ')' stmt N ELSE L stmt L  (5)
+	stmt : IF . '(' expr M ')' stmt L  (6)
 
 	'('  shift 42
 	.  error
 
 
 state 12
-	stmt : RETURN . expr ';'  (9)
+	stmt : RETURN . expr ';'  (10)
 
 	ID  shift 3
 	INT8  shift 4
@@ -263,28 +243,28 @@ state 12
 
 
 state 13
-	stmt : WHILE . '(' L expr M ')' stmt N L  (6)
+	stmt : WHILE . '(' L expr M ')' stmt N L  (7)
 
 	'('  shift 44
 	.  error
 
 
 state 14
-	expr : PP . ID  (47)
+	expr : PP . ID  (48)
 
 	ID  shift 45
 	.  error
 
 
 state 15
-	expr : NN . ID  (48)
+	expr : NN . ID  (49)
 
 	ID  shift 46
 	.  error
 
 
 state 16
-	expr : '+' . expr  (43)
+	expr : '+' . expr  (44)
 
 	ID  shift 3
 	INT8  shift 4
@@ -306,7 +286,7 @@ state 16
 
 
 state 17
-	expr : '-' . expr  (44)
+	expr : '-' . expr  (45)
 
 	ID  shift 3
 	INT8  shift 4
@@ -328,7 +308,7 @@ state 17
 
 
 state 18
-	expr : '!' . expr  (41)
+	expr : '!' . expr  (42)
 
 	ID  shift 3
 	INT8  shift 4
@@ -356,7 +336,7 @@ state 19
 
 
 state 20
-	expr : '(' . expr ')'  (45)
+	expr : '(' . expr ')'  (46)
 
 	ID  shift 3
 	INT8  shift 4
@@ -378,7 +358,7 @@ state 20
 
 
 state 21
-	stmt : '{' . stmts '}'  (10)
+	stmt : '{' . stmts '}'  (11)
 	stmts : .  (2)
 
 	.  reduce 2
@@ -387,7 +367,7 @@ state 21
 
 
 state 22
-	expr : '~' . expr  (42)
+	expr : '~' . expr  (43)
 
 	ID  shift 3
 	INT8  shift 4
@@ -409,7 +389,7 @@ state 22
 
 
 state 23
-	expr : '$' . INT8  (46)
+	expr : '$' . INT8  (47)
 
 	INT8  shift 53
 	.  error
@@ -423,24 +403,24 @@ state 24
 
 state 25
 	stmt : expr . ';'  (4)
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
 
 	OR  shift 54
 	AN  shift 55
@@ -465,13 +445,13 @@ state 25
 
 
 state 26
-	stmt : error ';' .  (11)
+	stmt : error ';' .  (12)
 
-	.  reduce 11
+	.  reduce 12
 
 
 state 27
-	expr : ID PA . expr  (13)
+	expr : ID PA . expr  (14)
 
 	ID  shift 3
 	INT8  shift 4
@@ -493,7 +473,7 @@ state 27
 
 
 state 28
-	expr : ID NA . expr  (14)
+	expr : ID NA . expr  (15)
 
 	ID  shift 3
 	INT8  shift 4
@@ -515,7 +495,7 @@ state 28
 
 
 state 29
-	expr : ID TA . expr  (15)
+	expr : ID TA . expr  (16)
 
 	ID  shift 3
 	INT8  shift 4
@@ -537,7 +517,7 @@ state 29
 
 
 state 30
-	expr : ID DA . expr  (16)
+	expr : ID DA . expr  (17)
 
 	ID  shift 3
 	INT8  shift 4
@@ -559,7 +539,7 @@ state 30
 
 
 state 31
-	expr : ID MA . expr  (17)
+	expr : ID MA . expr  (18)
 
 	ID  shift 3
 	INT8  shift 4
@@ -581,7 +561,7 @@ state 31
 
 
 state 32
-	expr : ID AA . expr  (18)
+	expr : ID AA . expr  (19)
 
 	ID  shift 3
 	INT8  shift 4
@@ -603,7 +583,7 @@ state 32
 
 
 state 33
-	expr : ID XA . expr  (19)
+	expr : ID XA . expr  (20)
 
 	ID  shift 3
 	INT8  shift 4
@@ -625,7 +605,7 @@ state 33
 
 
 state 34
-	expr : ID OA . expr  (20)
+	expr : ID OA . expr  (21)
 
 	ID  shift 3
 	INT8  shift 4
@@ -647,7 +627,7 @@ state 34
 
 
 state 35
-	expr : ID LA . expr  (21)
+	expr : ID LA . expr  (22)
 
 	ID  shift 3
 	INT8  shift 4
@@ -669,7 +649,7 @@ state 35
 
 
 state 36
-	expr : ID RA . expr  (22)
+	expr : ID RA . expr  (23)
 
 	ID  shift 3
 	INT8  shift 4
@@ -691,19 +671,19 @@ state 36
 
 
 state 37
-	expr : ID PP .  (49)
-
-	.  reduce 49
-
-
-state 38
-	expr : ID NN .  (50)
+	expr : ID PP .  (50)
 
 	.  reduce 50
 
 
+state 38
+	expr : ID NN .  (51)
+
+	.  reduce 51
+
+
 state 39
-	expr : ID '=' . expr  (12)
+	expr : ID '=' . expr  (13)
 
 	ID  shift 3
 	INT8  shift 4
@@ -725,14 +705,38 @@ state 39
 
 
 state 40
-	stmt : DO stmt . WHILE '(' expr ')' ';'  (7)
+	stmt : DO L . stmt WHILE '(' expr M N L ')' ';'  (8)
 
-	WHILE  shift 84
+	error  shift 2
+	ID  shift 3
+	INT8  shift 4
+	INT16  shift 5
+	INT32  shift 6
+	FLT  shift 7
+	STR  shift 8
+	DO  shift 9
+	FOR  shift 10
+	IF  shift 11
+	RETURN  shift 12
+	WHILE  shift 13
+	PP  shift 14
+	NN  shift 15
+	'+'  shift 16
+	'-'  shift 17
+	'!'  shift 18
+	';'  shift 19
+	'('  shift 20
+	'{'  shift 21
+	'~'  shift 22
+	'$'  shift 23
 	.  error
+
+	stmt  goto 84
+	expr  goto 25
 
 
 state 41
-	stmt : FOR '(' . expr ';' expr ';' expr ')' stmt  (8)
+	stmt : FOR '(' . expr ';' L expr M N ';' L expr N ')' L stmt N L  (9)
 
 	ID  shift 3
 	INT8  shift 4
@@ -755,6 +759,7 @@ state 41
 
 state 42
 	stmt : IF '(' . expr M ')' stmt N ELSE L stmt L  (5)
+	stmt : IF '(' . expr M ')' stmt L  (6)
 
 	ID  shift 3
 	INT8  shift 4
@@ -776,25 +781,25 @@ state 42
 
 
 state 43
-	stmt : RETURN expr . ';'  (9)
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+	stmt : RETURN expr . ';'  (10)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
 
 	OR  shift 54
 	AN  shift 55
@@ -819,109 +824,56 @@ state 43
 
 
 state 44
-	stmt : WHILE '(' . L expr M ')' stmt N L  (6)
-	L : .  (57)
+	stmt : WHILE '(' . L expr M ')' stmt N L  (7)
+	L : .  (58)
 
-	.  reduce 57
+	.  reduce 58
 
 	L  goto 88
 
 
 state 45
-	expr : PP ID .  (47)
-
-	.  reduce 47
-
-
-state 46
-	expr : NN ID .  (48)
+	expr : PP ID .  (48)
 
 	.  reduce 48
 
 
-47: shift/reduce conflict (shift 56, reduce 43) on EQ
-47: shift/reduce conflict (shift 57, reduce 43) on NE
-47: shift/reduce conflict (shift 58, reduce 43) on LE
-47: shift/reduce conflict (shift 59, reduce 43) on GE
-47: shift/reduce conflict (shift 60, reduce 43) on LS
-47: shift/reduce conflict (shift 61, reduce 43) on RS
-47: shift/reduce conflict (shift 69, reduce 43) on '^'
-47: shift/reduce conflict (shift 70, reduce 43) on '<'
-47: shift/reduce conflict (shift 71, reduce 43) on '>'
-47: shift/reduce conflict (shift 72, reduce 43) on '%'
+state 46
+	expr : NN ID .  (49)
+
+	.  reduce 49
+
+
+47: shift/reduce conflict (shift 56, reduce 44) on EQ
+47: shift/reduce conflict (shift 57, reduce 44) on NE
+47: shift/reduce conflict (shift 58, reduce 44) on LE
+47: shift/reduce conflict (shift 59, reduce 44) on GE
+47: shift/reduce conflict (shift 60, reduce 44) on LS
+47: shift/reduce conflict (shift 61, reduce 44) on RS
+47: shift/reduce conflict (shift 69, reduce 44) on '^'
+47: shift/reduce conflict (shift 70, reduce 44) on '<'
+47: shift/reduce conflict (shift 71, reduce 44) on '>'
+47: shift/reduce conflict (shift 72, reduce 44) on '%'
 state 47
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-	expr : '+' expr .  (43)
-
-	EQ  shift 56
-	NE  shift 57
-	LE  shift 58
-	GE  shift 59
-	LS  shift 60
-	RS  shift 61
-	'^'  shift 69
-	'<'  shift 70
-	'>'  shift 71
-	'%'  shift 72
-	OR  reduce 43
-	AN  reduce 43
-	'&'  reduce 43
-	'|'  reduce 43
-	'+'  reduce 43
-	'-'  reduce 43
-	'*'  reduce 43
-	'/'  reduce 43
-	';'  reduce 43
-	')'  reduce 43
-
-
-48: shift/reduce conflict (shift 56, reduce 44) on EQ
-48: shift/reduce conflict (shift 57, reduce 44) on NE
-48: shift/reduce conflict (shift 58, reduce 44) on LE
-48: shift/reduce conflict (shift 59, reduce 44) on GE
-48: shift/reduce conflict (shift 60, reduce 44) on LS
-48: shift/reduce conflict (shift 61, reduce 44) on RS
-48: shift/reduce conflict (shift 69, reduce 44) on '^'
-48: shift/reduce conflict (shift 70, reduce 44) on '<'
-48: shift/reduce conflict (shift 71, reduce 44) on '>'
-48: shift/reduce conflict (shift 72, reduce 44) on '%'
-state 48
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-	expr : '-' expr .  (44)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+	expr : '+' expr .  (44)
 
 	EQ  shift 56
 	NE  shift 57
@@ -945,36 +897,36 @@ state 48
 	')'  reduce 44
 
 
-49: shift/reduce conflict (shift 56, reduce 41) on EQ
-49: shift/reduce conflict (shift 57, reduce 41) on NE
-49: shift/reduce conflict (shift 58, reduce 41) on LE
-49: shift/reduce conflict (shift 59, reduce 41) on GE
-49: shift/reduce conflict (shift 60, reduce 41) on LS
-49: shift/reduce conflict (shift 61, reduce 41) on RS
-49: shift/reduce conflict (shift 69, reduce 41) on '^'
-49: shift/reduce conflict (shift 70, reduce 41) on '<'
-49: shift/reduce conflict (shift 71, reduce 41) on '>'
-49: shift/reduce conflict (shift 72, reduce 41) on '%'
-state 49
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-	expr : '!' expr .  (41)
+48: shift/reduce conflict (shift 56, reduce 45) on EQ
+48: shift/reduce conflict (shift 57, reduce 45) on NE
+48: shift/reduce conflict (shift 58, reduce 45) on LE
+48: shift/reduce conflict (shift 59, reduce 45) on GE
+48: shift/reduce conflict (shift 60, reduce 45) on LS
+48: shift/reduce conflict (shift 61, reduce 45) on RS
+48: shift/reduce conflict (shift 69, reduce 45) on '^'
+48: shift/reduce conflict (shift 70, reduce 45) on '<'
+48: shift/reduce conflict (shift 71, reduce 45) on '>'
+48: shift/reduce conflict (shift 72, reduce 45) on '%'
+state 48
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+	expr : '-' expr .  (45)
 
 	EQ  shift 56
 	NE  shift 57
@@ -986,38 +938,91 @@ state 49
 	'<'  shift 70
 	'>'  shift 71
 	'%'  shift 72
-	OR  reduce 41
-	AN  reduce 41
-	'&'  reduce 41
-	'|'  reduce 41
-	'+'  reduce 41
-	'-'  reduce 41
-	'*'  reduce 41
-	'/'  reduce 41
-	';'  reduce 41
-	')'  reduce 41
+	OR  reduce 45
+	AN  reduce 45
+	'&'  reduce 45
+	'|'  reduce 45
+	'+'  reduce 45
+	'-'  reduce 45
+	'*'  reduce 45
+	'/'  reduce 45
+	';'  reduce 45
+	')'  reduce 45
+
+
+49: shift/reduce conflict (shift 56, reduce 42) on EQ
+49: shift/reduce conflict (shift 57, reduce 42) on NE
+49: shift/reduce conflict (shift 58, reduce 42) on LE
+49: shift/reduce conflict (shift 59, reduce 42) on GE
+49: shift/reduce conflict (shift 60, reduce 42) on LS
+49: shift/reduce conflict (shift 61, reduce 42) on RS
+49: shift/reduce conflict (shift 69, reduce 42) on '^'
+49: shift/reduce conflict (shift 70, reduce 42) on '<'
+49: shift/reduce conflict (shift 71, reduce 42) on '>'
+49: shift/reduce conflict (shift 72, reduce 42) on '%'
+state 49
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+	expr : '!' expr .  (42)
+
+	EQ  shift 56
+	NE  shift 57
+	LE  shift 58
+	GE  shift 59
+	LS  shift 60
+	RS  shift 61
+	'^'  shift 69
+	'<'  shift 70
+	'>'  shift 71
+	'%'  shift 72
+	OR  reduce 42
+	AN  reduce 42
+	'&'  reduce 42
+	'|'  reduce 42
+	'+'  reduce 42
+	'-'  reduce 42
+	'*'  reduce 42
+	'/'  reduce 42
+	';'  reduce 42
+	')'  reduce 42
 
 
 state 50
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-	expr : '(' expr . ')'  (45)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+	expr : '(' expr . ')'  (46)
 
 	OR  shift 54
 	AN  shift 55
@@ -1043,7 +1048,7 @@ state 50
 
 state 51
 	stmts : stmts . stmt  (1)
-	stmt : '{' stmts . '}'  (10)
+	stmt : '{' stmts . '}'  (11)
 
 	error  shift 2
 	ID  shift 3
@@ -1074,44 +1079,44 @@ state 51
 	expr  goto 25
 
 
-52: shift/reduce conflict (shift 54, reduce 42) on OR
-52: shift/reduce conflict (shift 55, reduce 42) on AN
-52: shift/reduce conflict (shift 56, reduce 42) on EQ
-52: shift/reduce conflict (shift 57, reduce 42) on NE
-52: shift/reduce conflict (shift 58, reduce 42) on LE
-52: shift/reduce conflict (shift 59, reduce 42) on GE
-52: shift/reduce conflict (shift 60, reduce 42) on LS
-52: shift/reduce conflict (shift 61, reduce 42) on RS
-52: shift/reduce conflict (shift 62, reduce 42) on '&'
-52: shift/reduce conflict (shift 63, reduce 42) on '|'
-52: shift/reduce conflict (shift 64, reduce 42) on '+'
-52: shift/reduce conflict (shift 65, reduce 42) on '-'
-52: shift/reduce conflict (shift 66, reduce 42) on '*'
-52: shift/reduce conflict (shift 67, reduce 42) on '/'
-52: shift/reduce conflict (shift 69, reduce 42) on '^'
-52: shift/reduce conflict (shift 70, reduce 42) on '<'
-52: shift/reduce conflict (shift 71, reduce 42) on '>'
-52: shift/reduce conflict (shift 72, reduce 42) on '%'
+52: shift/reduce conflict (shift 54, reduce 43) on OR
+52: shift/reduce conflict (shift 55, reduce 43) on AN
+52: shift/reduce conflict (shift 56, reduce 43) on EQ
+52: shift/reduce conflict (shift 57, reduce 43) on NE
+52: shift/reduce conflict (shift 58, reduce 43) on LE
+52: shift/reduce conflict (shift 59, reduce 43) on GE
+52: shift/reduce conflict (shift 60, reduce 43) on LS
+52: shift/reduce conflict (shift 61, reduce 43) on RS
+52: shift/reduce conflict (shift 62, reduce 43) on '&'
+52: shift/reduce conflict (shift 63, reduce 43) on '|'
+52: shift/reduce conflict (shift 64, reduce 43) on '+'
+52: shift/reduce conflict (shift 65, reduce 43) on '-'
+52: shift/reduce conflict (shift 66, reduce 43) on '*'
+52: shift/reduce conflict (shift 67, reduce 43) on '/'
+52: shift/reduce conflict (shift 69, reduce 43) on '^'
+52: shift/reduce conflict (shift 70, reduce 43) on '<'
+52: shift/reduce conflict (shift 71, reduce 43) on '>'
+52: shift/reduce conflict (shift 72, reduce 43) on '%'
 state 52
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-	expr : '~' expr .  (42)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+	expr : '~' expr .  (43)
 
 	OR  shift 54
 	AN  shift 55
@@ -1131,18 +1136,18 @@ state 52
 	'<'  shift 70
 	'>'  shift 71
 	'%'  shift 72
-	';'  reduce 42
-	')'  reduce 42
+	';'  reduce 43
+	')'  reduce 43
 
 
 state 53
-	expr : '$' INT8 .  (46)
+	expr : '$' INT8 .  (47)
 
-	.  reduce 46
+	.  reduce 47
 
 
 state 54
-	expr : expr OR . expr  (23)
+	expr : expr OR . expr  (24)
 
 	ID  shift 3
 	INT8  shift 4
@@ -1164,7 +1169,7 @@ state 54
 
 
 state 55
-	expr : expr AN . expr  (24)
+	expr : expr AN . expr  (25)
 
 	ID  shift 3
 	INT8  shift 4
@@ -1186,7 +1191,7 @@ state 55
 
 
 state 56
-	expr : expr EQ . expr  (28)
+	expr : expr EQ . expr  (29)
 
 	ID  shift 3
 	INT8  shift 4
@@ -1208,7 +1213,7 @@ state 56
 
 
 state 57
-	expr : expr NE . expr  (29)
+	expr : expr NE . expr  (30)
 
 	ID  shift 3
 	INT8  shift 4
@@ -1230,7 +1235,7 @@ state 57
 
 
 state 58
-	expr : expr LE . expr  (32)
+	expr : expr LE . expr  (33)
 
 	ID  shift 3
 	INT8  shift 4
@@ -1252,7 +1257,7 @@ state 58
 
 
 state 59
-	expr : expr GE . expr  (33)
+	expr : expr GE . expr  (34)
 
 	ID  shift 3
 	INT8  shift 4
@@ -1274,7 +1279,7 @@ state 59
 
 
 state 60
-	expr : expr LS . expr  (34)
+	expr : expr LS . expr  (35)
 
 	ID  shift 3
 	INT8  shift 4
@@ -1296,7 +1301,7 @@ state 60
 
 
 state 61
-	expr : expr RS . expr  (35)
+	expr : expr RS . expr  (36)
 
 	ID  shift 3
 	INT8  shift 4
@@ -1318,7 +1323,7 @@ state 61
 
 
 state 62
-	expr : expr '&' . expr  (27)
+	expr : expr '&' . expr  (28)
 
 	ID  shift 3
 	INT8  shift 4
@@ -1340,7 +1345,7 @@ state 62
 
 
 state 63
-	expr : expr '|' . expr  (25)
+	expr : expr '|' . expr  (26)
 
 	ID  shift 3
 	INT8  shift 4
@@ -1362,7 +1367,7 @@ state 63
 
 
 state 64
-	expr : expr '+' . expr  (36)
+	expr : expr '+' . expr  (37)
 
 	ID  shift 3
 	INT8  shift 4
@@ -1384,7 +1389,7 @@ state 64
 
 
 state 65
-	expr : expr '-' . expr  (37)
+	expr : expr '-' . expr  (38)
 
 	ID  shift 3
 	INT8  shift 4
@@ -1406,7 +1411,7 @@ state 65
 
 
 state 66
-	expr : expr '*' . expr  (38)
+	expr : expr '*' . expr  (39)
 
 	ID  shift 3
 	INT8  shift 4
@@ -1428,7 +1433,7 @@ state 66
 
 
 state 67
-	expr : expr '/' . expr  (39)
+	expr : expr '/' . expr  (40)
 
 	ID  shift 3
 	INT8  shift 4
@@ -1456,7 +1461,7 @@ state 68
 
 
 state 69
-	expr : expr '^' . expr  (26)
+	expr : expr '^' . expr  (27)
 
 	ID  shift 3
 	INT8  shift 4
@@ -1478,7 +1483,7 @@ state 69
 
 
 state 70
-	expr : expr '<' . expr  (30)
+	expr : expr '<' . expr  (31)
 
 	ID  shift 3
 	INT8  shift 4
@@ -1500,7 +1505,7 @@ state 70
 
 
 state 71
-	expr : expr '>' . expr  (31)
+	expr : expr '>' . expr  (32)
 
 	ID  shift 3
 	INT8  shift 4
@@ -1522,7 +1527,7 @@ state 71
 
 
 state 72
-	expr : expr '%' . expr  (40)
+	expr : expr '%' . expr  (41)
 
 	ID  shift 3
 	INT8  shift 4
@@ -1543,105 +1548,44 @@ state 72
 	expr  goto 108
 
 
-73: shift/reduce conflict (shift 54, reduce 13) on OR
-73: shift/reduce conflict (shift 55, reduce 13) on AN
-73: shift/reduce conflict (shift 56, reduce 13) on EQ
-73: shift/reduce conflict (shift 57, reduce 13) on NE
-73: shift/reduce conflict (shift 58, reduce 13) on LE
-73: shift/reduce conflict (shift 59, reduce 13) on GE
-73: shift/reduce conflict (shift 60, reduce 13) on LS
-73: shift/reduce conflict (shift 61, reduce 13) on RS
-73: shift/reduce conflict (shift 62, reduce 13) on '&'
-73: shift/reduce conflict (shift 63, reduce 13) on '|'
-73: shift/reduce conflict (shift 64, reduce 13) on '+'
-73: shift/reduce conflict (shift 65, reduce 13) on '-'
-73: shift/reduce conflict (shift 66, reduce 13) on '*'
-73: shift/reduce conflict (shift 67, reduce 13) on '/'
-73: shift/reduce conflict (shift 69, reduce 13) on '^'
-73: shift/reduce conflict (shift 70, reduce 13) on '<'
-73: shift/reduce conflict (shift 71, reduce 13) on '>'
-73: shift/reduce conflict (shift 72, reduce 13) on '%'
+73: shift/reduce conflict (shift 54, reduce 14) on OR
+73: shift/reduce conflict (shift 55, reduce 14) on AN
+73: shift/reduce conflict (shift 56, reduce 14) on EQ
+73: shift/reduce conflict (shift 57, reduce 14) on NE
+73: shift/reduce conflict (shift 58, reduce 14) on LE
+73: shift/reduce conflict (shift 59, reduce 14) on GE
+73: shift/reduce conflict (shift 60, reduce 14) on LS
+73: shift/reduce conflict (shift 61, reduce 14) on RS
+73: shift/reduce conflict (shift 62, reduce 14) on '&'
+73: shift/reduce conflict (shift 63, reduce 14) on '|'
+73: shift/reduce conflict (shift 64, reduce 14) on '+'
+73: shift/reduce conflict (shift 65, reduce 14) on '-'
+73: shift/reduce conflict (shift 66, reduce 14) on '*'
+73: shift/reduce conflict (shift 67, reduce 14) on '/'
+73: shift/reduce conflict (shift 69, reduce 14) on '^'
+73: shift/reduce conflict (shift 70, reduce 14) on '<'
+73: shift/reduce conflict (shift 71, reduce 14) on '>'
+73: shift/reduce conflict (shift 72, reduce 14) on '%'
 state 73
-	expr : ID PA expr .  (13)
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-
-	OR  shift 54
-	AN  shift 55
-	EQ  shift 56
-	NE  shift 57
-	LE  shift 58
-	GE  shift 59
-	LS  shift 60
-	RS  shift 61
-	'&'  shift 62
-	'|'  shift 63
-	'+'  shift 64
-	'-'  shift 65
-	'*'  shift 66
-	'/'  shift 67
-	'^'  shift 69
-	'<'  shift 70
-	'>'  shift 71
-	'%'  shift 72
-	';'  reduce 13
-	')'  reduce 13
-
-
-74: shift/reduce conflict (shift 54, reduce 14) on OR
-74: shift/reduce conflict (shift 55, reduce 14) on AN
-74: shift/reduce conflict (shift 56, reduce 14) on EQ
-74: shift/reduce conflict (shift 57, reduce 14) on NE
-74: shift/reduce conflict (shift 58, reduce 14) on LE
-74: shift/reduce conflict (shift 59, reduce 14) on GE
-74: shift/reduce conflict (shift 60, reduce 14) on LS
-74: shift/reduce conflict (shift 61, reduce 14) on RS
-74: shift/reduce conflict (shift 62, reduce 14) on '&'
-74: shift/reduce conflict (shift 63, reduce 14) on '|'
-74: shift/reduce conflict (shift 64, reduce 14) on '+'
-74: shift/reduce conflict (shift 65, reduce 14) on '-'
-74: shift/reduce conflict (shift 66, reduce 14) on '*'
-74: shift/reduce conflict (shift 67, reduce 14) on '/'
-74: shift/reduce conflict (shift 69, reduce 14) on '^'
-74: shift/reduce conflict (shift 70, reduce 14) on '<'
-74: shift/reduce conflict (shift 71, reduce 14) on '>'
-74: shift/reduce conflict (shift 72, reduce 14) on '%'
-state 74
-	expr : ID NA expr .  (14)
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+	expr : ID PA expr .  (14)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
 
 	OR  shift 54
 	AN  shift 55
@@ -1665,44 +1609,44 @@ state 74
 	')'  reduce 14
 
 
-75: shift/reduce conflict (shift 54, reduce 15) on OR
-75: shift/reduce conflict (shift 55, reduce 15) on AN
-75: shift/reduce conflict (shift 56, reduce 15) on EQ
-75: shift/reduce conflict (shift 57, reduce 15) on NE
-75: shift/reduce conflict (shift 58, reduce 15) on LE
-75: shift/reduce conflict (shift 59, reduce 15) on GE
-75: shift/reduce conflict (shift 60, reduce 15) on LS
-75: shift/reduce conflict (shift 61, reduce 15) on RS
-75: shift/reduce conflict (shift 62, reduce 15) on '&'
-75: shift/reduce conflict (shift 63, reduce 15) on '|'
-75: shift/reduce conflict (shift 64, reduce 15) on '+'
-75: shift/reduce conflict (shift 65, reduce 15) on '-'
-75: shift/reduce conflict (shift 66, reduce 15) on '*'
-75: shift/reduce conflict (shift 67, reduce 15) on '/'
-75: shift/reduce conflict (shift 69, reduce 15) on '^'
-75: shift/reduce conflict (shift 70, reduce 15) on '<'
-75: shift/reduce conflict (shift 71, reduce 15) on '>'
-75: shift/reduce conflict (shift 72, reduce 15) on '%'
-state 75
-	expr : ID TA expr .  (15)
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+74: shift/reduce conflict (shift 54, reduce 15) on OR
+74: shift/reduce conflict (shift 55, reduce 15) on AN
+74: shift/reduce conflict (shift 56, reduce 15) on EQ
+74: shift/reduce conflict (shift 57, reduce 15) on NE
+74: shift/reduce conflict (shift 58, reduce 15) on LE
+74: shift/reduce conflict (shift 59, reduce 15) on GE
+74: shift/reduce conflict (shift 60, reduce 15) on LS
+74: shift/reduce conflict (shift 61, reduce 15) on RS
+74: shift/reduce conflict (shift 62, reduce 15) on '&'
+74: shift/reduce conflict (shift 63, reduce 15) on '|'
+74: shift/reduce conflict (shift 64, reduce 15) on '+'
+74: shift/reduce conflict (shift 65, reduce 15) on '-'
+74: shift/reduce conflict (shift 66, reduce 15) on '*'
+74: shift/reduce conflict (shift 67, reduce 15) on '/'
+74: shift/reduce conflict (shift 69, reduce 15) on '^'
+74: shift/reduce conflict (shift 70, reduce 15) on '<'
+74: shift/reduce conflict (shift 71, reduce 15) on '>'
+74: shift/reduce conflict (shift 72, reduce 15) on '%'
+state 74
+	expr : ID NA expr .  (15)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
 
 	OR  shift 54
 	AN  shift 55
@@ -1726,44 +1670,44 @@ state 75
 	')'  reduce 15
 
 
-76: shift/reduce conflict (shift 54, reduce 16) on OR
-76: shift/reduce conflict (shift 55, reduce 16) on AN
-76: shift/reduce conflict (shift 56, reduce 16) on EQ
-76: shift/reduce conflict (shift 57, reduce 16) on NE
-76: shift/reduce conflict (shift 58, reduce 16) on LE
-76: shift/reduce conflict (shift 59, reduce 16) on GE
-76: shift/reduce conflict (shift 60, reduce 16) on LS
-76: shift/reduce conflict (shift 61, reduce 16) on RS
-76: shift/reduce conflict (shift 62, reduce 16) on '&'
-76: shift/reduce conflict (shift 63, reduce 16) on '|'
-76: shift/reduce conflict (shift 64, reduce 16) on '+'
-76: shift/reduce conflict (shift 65, reduce 16) on '-'
-76: shift/reduce conflict (shift 66, reduce 16) on '*'
-76: shift/reduce conflict (shift 67, reduce 16) on '/'
-76: shift/reduce conflict (shift 69, reduce 16) on '^'
-76: shift/reduce conflict (shift 70, reduce 16) on '<'
-76: shift/reduce conflict (shift 71, reduce 16) on '>'
-76: shift/reduce conflict (shift 72, reduce 16) on '%'
-state 76
-	expr : ID DA expr .  (16)
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+75: shift/reduce conflict (shift 54, reduce 16) on OR
+75: shift/reduce conflict (shift 55, reduce 16) on AN
+75: shift/reduce conflict (shift 56, reduce 16) on EQ
+75: shift/reduce conflict (shift 57, reduce 16) on NE
+75: shift/reduce conflict (shift 58, reduce 16) on LE
+75: shift/reduce conflict (shift 59, reduce 16) on GE
+75: shift/reduce conflict (shift 60, reduce 16) on LS
+75: shift/reduce conflict (shift 61, reduce 16) on RS
+75: shift/reduce conflict (shift 62, reduce 16) on '&'
+75: shift/reduce conflict (shift 63, reduce 16) on '|'
+75: shift/reduce conflict (shift 64, reduce 16) on '+'
+75: shift/reduce conflict (shift 65, reduce 16) on '-'
+75: shift/reduce conflict (shift 66, reduce 16) on '*'
+75: shift/reduce conflict (shift 67, reduce 16) on '/'
+75: shift/reduce conflict (shift 69, reduce 16) on '^'
+75: shift/reduce conflict (shift 70, reduce 16) on '<'
+75: shift/reduce conflict (shift 71, reduce 16) on '>'
+75: shift/reduce conflict (shift 72, reduce 16) on '%'
+state 75
+	expr : ID TA expr .  (16)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
 
 	OR  shift 54
 	AN  shift 55
@@ -1787,44 +1731,44 @@ state 76
 	')'  reduce 16
 
 
-77: shift/reduce conflict (shift 54, reduce 17) on OR
-77: shift/reduce conflict (shift 55, reduce 17) on AN
-77: shift/reduce conflict (shift 56, reduce 17) on EQ
-77: shift/reduce conflict (shift 57, reduce 17) on NE
-77: shift/reduce conflict (shift 58, reduce 17) on LE
-77: shift/reduce conflict (shift 59, reduce 17) on GE
-77: shift/reduce conflict (shift 60, reduce 17) on LS
-77: shift/reduce conflict (shift 61, reduce 17) on RS
-77: shift/reduce conflict (shift 62, reduce 17) on '&'
-77: shift/reduce conflict (shift 63, reduce 17) on '|'
-77: shift/reduce conflict (shift 64, reduce 17) on '+'
-77: shift/reduce conflict (shift 65, reduce 17) on '-'
-77: shift/reduce conflict (shift 66, reduce 17) on '*'
-77: shift/reduce conflict (shift 67, reduce 17) on '/'
-77: shift/reduce conflict (shift 69, reduce 17) on '^'
-77: shift/reduce conflict (shift 70, reduce 17) on '<'
-77: shift/reduce conflict (shift 71, reduce 17) on '>'
-77: shift/reduce conflict (shift 72, reduce 17) on '%'
-state 77
-	expr : ID MA expr .  (17)
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+76: shift/reduce conflict (shift 54, reduce 17) on OR
+76: shift/reduce conflict (shift 55, reduce 17) on AN
+76: shift/reduce conflict (shift 56, reduce 17) on EQ
+76: shift/reduce conflict (shift 57, reduce 17) on NE
+76: shift/reduce conflict (shift 58, reduce 17) on LE
+76: shift/reduce conflict (shift 59, reduce 17) on GE
+76: shift/reduce conflict (shift 60, reduce 17) on LS
+76: shift/reduce conflict (shift 61, reduce 17) on RS
+76: shift/reduce conflict (shift 62, reduce 17) on '&'
+76: shift/reduce conflict (shift 63, reduce 17) on '|'
+76: shift/reduce conflict (shift 64, reduce 17) on '+'
+76: shift/reduce conflict (shift 65, reduce 17) on '-'
+76: shift/reduce conflict (shift 66, reduce 17) on '*'
+76: shift/reduce conflict (shift 67, reduce 17) on '/'
+76: shift/reduce conflict (shift 69, reduce 17) on '^'
+76: shift/reduce conflict (shift 70, reduce 17) on '<'
+76: shift/reduce conflict (shift 71, reduce 17) on '>'
+76: shift/reduce conflict (shift 72, reduce 17) on '%'
+state 76
+	expr : ID DA expr .  (17)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
 
 	OR  shift 54
 	AN  shift 55
@@ -1848,44 +1792,44 @@ state 77
 	')'  reduce 17
 
 
-78: shift/reduce conflict (shift 54, reduce 18) on OR
-78: shift/reduce conflict (shift 55, reduce 18) on AN
-78: shift/reduce conflict (shift 56, reduce 18) on EQ
-78: shift/reduce conflict (shift 57, reduce 18) on NE
-78: shift/reduce conflict (shift 58, reduce 18) on LE
-78: shift/reduce conflict (shift 59, reduce 18) on GE
-78: shift/reduce conflict (shift 60, reduce 18) on LS
-78: shift/reduce conflict (shift 61, reduce 18) on RS
-78: shift/reduce conflict (shift 62, reduce 18) on '&'
-78: shift/reduce conflict (shift 63, reduce 18) on '|'
-78: shift/reduce conflict (shift 64, reduce 18) on '+'
-78: shift/reduce conflict (shift 65, reduce 18) on '-'
-78: shift/reduce conflict (shift 66, reduce 18) on '*'
-78: shift/reduce conflict (shift 67, reduce 18) on '/'
-78: shift/reduce conflict (shift 69, reduce 18) on '^'
-78: shift/reduce conflict (shift 70, reduce 18) on '<'
-78: shift/reduce conflict (shift 71, reduce 18) on '>'
-78: shift/reduce conflict (shift 72, reduce 18) on '%'
-state 78
-	expr : ID AA expr .  (18)
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+77: shift/reduce conflict (shift 54, reduce 18) on OR
+77: shift/reduce conflict (shift 55, reduce 18) on AN
+77: shift/reduce conflict (shift 56, reduce 18) on EQ
+77: shift/reduce conflict (shift 57, reduce 18) on NE
+77: shift/reduce conflict (shift 58, reduce 18) on LE
+77: shift/reduce conflict (shift 59, reduce 18) on GE
+77: shift/reduce conflict (shift 60, reduce 18) on LS
+77: shift/reduce conflict (shift 61, reduce 18) on RS
+77: shift/reduce conflict (shift 62, reduce 18) on '&'
+77: shift/reduce conflict (shift 63, reduce 18) on '|'
+77: shift/reduce conflict (shift 64, reduce 18) on '+'
+77: shift/reduce conflict (shift 65, reduce 18) on '-'
+77: shift/reduce conflict (shift 66, reduce 18) on '*'
+77: shift/reduce conflict (shift 67, reduce 18) on '/'
+77: shift/reduce conflict (shift 69, reduce 18) on '^'
+77: shift/reduce conflict (shift 70, reduce 18) on '<'
+77: shift/reduce conflict (shift 71, reduce 18) on '>'
+77: shift/reduce conflict (shift 72, reduce 18) on '%'
+state 77
+	expr : ID MA expr .  (18)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
 
 	OR  shift 54
 	AN  shift 55
@@ -1909,44 +1853,44 @@ state 78
 	')'  reduce 18
 
 
-79: shift/reduce conflict (shift 54, reduce 19) on OR
-79: shift/reduce conflict (shift 55, reduce 19) on AN
-79: shift/reduce conflict (shift 56, reduce 19) on EQ
-79: shift/reduce conflict (shift 57, reduce 19) on NE
-79: shift/reduce conflict (shift 58, reduce 19) on LE
-79: shift/reduce conflict (shift 59, reduce 19) on GE
-79: shift/reduce conflict (shift 60, reduce 19) on LS
-79: shift/reduce conflict (shift 61, reduce 19) on RS
-79: shift/reduce conflict (shift 62, reduce 19) on '&'
-79: shift/reduce conflict (shift 63, reduce 19) on '|'
-79: shift/reduce conflict (shift 64, reduce 19) on '+'
-79: shift/reduce conflict (shift 65, reduce 19) on '-'
-79: shift/reduce conflict (shift 66, reduce 19) on '*'
-79: shift/reduce conflict (shift 67, reduce 19) on '/'
-79: shift/reduce conflict (shift 69, reduce 19) on '^'
-79: shift/reduce conflict (shift 70, reduce 19) on '<'
-79: shift/reduce conflict (shift 71, reduce 19) on '>'
-79: shift/reduce conflict (shift 72, reduce 19) on '%'
-state 79
-	expr : ID XA expr .  (19)
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+78: shift/reduce conflict (shift 54, reduce 19) on OR
+78: shift/reduce conflict (shift 55, reduce 19) on AN
+78: shift/reduce conflict (shift 56, reduce 19) on EQ
+78: shift/reduce conflict (shift 57, reduce 19) on NE
+78: shift/reduce conflict (shift 58, reduce 19) on LE
+78: shift/reduce conflict (shift 59, reduce 19) on GE
+78: shift/reduce conflict (shift 60, reduce 19) on LS
+78: shift/reduce conflict (shift 61, reduce 19) on RS
+78: shift/reduce conflict (shift 62, reduce 19) on '&'
+78: shift/reduce conflict (shift 63, reduce 19) on '|'
+78: shift/reduce conflict (shift 64, reduce 19) on '+'
+78: shift/reduce conflict (shift 65, reduce 19) on '-'
+78: shift/reduce conflict (shift 66, reduce 19) on '*'
+78: shift/reduce conflict (shift 67, reduce 19) on '/'
+78: shift/reduce conflict (shift 69, reduce 19) on '^'
+78: shift/reduce conflict (shift 70, reduce 19) on '<'
+78: shift/reduce conflict (shift 71, reduce 19) on '>'
+78: shift/reduce conflict (shift 72, reduce 19) on '%'
+state 78
+	expr : ID AA expr .  (19)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
 
 	OR  shift 54
 	AN  shift 55
@@ -1970,44 +1914,44 @@ state 79
 	')'  reduce 19
 
 
-80: shift/reduce conflict (shift 54, reduce 20) on OR
-80: shift/reduce conflict (shift 55, reduce 20) on AN
-80: shift/reduce conflict (shift 56, reduce 20) on EQ
-80: shift/reduce conflict (shift 57, reduce 20) on NE
-80: shift/reduce conflict (shift 58, reduce 20) on LE
-80: shift/reduce conflict (shift 59, reduce 20) on GE
-80: shift/reduce conflict (shift 60, reduce 20) on LS
-80: shift/reduce conflict (shift 61, reduce 20) on RS
-80: shift/reduce conflict (shift 62, reduce 20) on '&'
-80: shift/reduce conflict (shift 63, reduce 20) on '|'
-80: shift/reduce conflict (shift 64, reduce 20) on '+'
-80: shift/reduce conflict (shift 65, reduce 20) on '-'
-80: shift/reduce conflict (shift 66, reduce 20) on '*'
-80: shift/reduce conflict (shift 67, reduce 20) on '/'
-80: shift/reduce conflict (shift 69, reduce 20) on '^'
-80: shift/reduce conflict (shift 70, reduce 20) on '<'
-80: shift/reduce conflict (shift 71, reduce 20) on '>'
-80: shift/reduce conflict (shift 72, reduce 20) on '%'
-state 80
-	expr : ID OA expr .  (20)
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+79: shift/reduce conflict (shift 54, reduce 20) on OR
+79: shift/reduce conflict (shift 55, reduce 20) on AN
+79: shift/reduce conflict (shift 56, reduce 20) on EQ
+79: shift/reduce conflict (shift 57, reduce 20) on NE
+79: shift/reduce conflict (shift 58, reduce 20) on LE
+79: shift/reduce conflict (shift 59, reduce 20) on GE
+79: shift/reduce conflict (shift 60, reduce 20) on LS
+79: shift/reduce conflict (shift 61, reduce 20) on RS
+79: shift/reduce conflict (shift 62, reduce 20) on '&'
+79: shift/reduce conflict (shift 63, reduce 20) on '|'
+79: shift/reduce conflict (shift 64, reduce 20) on '+'
+79: shift/reduce conflict (shift 65, reduce 20) on '-'
+79: shift/reduce conflict (shift 66, reduce 20) on '*'
+79: shift/reduce conflict (shift 67, reduce 20) on '/'
+79: shift/reduce conflict (shift 69, reduce 20) on '^'
+79: shift/reduce conflict (shift 70, reduce 20) on '<'
+79: shift/reduce conflict (shift 71, reduce 20) on '>'
+79: shift/reduce conflict (shift 72, reduce 20) on '%'
+state 79
+	expr : ID XA expr .  (20)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
 
 	OR  shift 54
 	AN  shift 55
@@ -2031,44 +1975,44 @@ state 80
 	')'  reduce 20
 
 
-81: shift/reduce conflict (shift 54, reduce 21) on OR
-81: shift/reduce conflict (shift 55, reduce 21) on AN
-81: shift/reduce conflict (shift 56, reduce 21) on EQ
-81: shift/reduce conflict (shift 57, reduce 21) on NE
-81: shift/reduce conflict (shift 58, reduce 21) on LE
-81: shift/reduce conflict (shift 59, reduce 21) on GE
-81: shift/reduce conflict (shift 60, reduce 21) on LS
-81: shift/reduce conflict (shift 61, reduce 21) on RS
-81: shift/reduce conflict (shift 62, reduce 21) on '&'
-81: shift/reduce conflict (shift 63, reduce 21) on '|'
-81: shift/reduce conflict (shift 64, reduce 21) on '+'
-81: shift/reduce conflict (shift 65, reduce 21) on '-'
-81: shift/reduce conflict (shift 66, reduce 21) on '*'
-81: shift/reduce conflict (shift 67, reduce 21) on '/'
-81: shift/reduce conflict (shift 69, reduce 21) on '^'
-81: shift/reduce conflict (shift 70, reduce 21) on '<'
-81: shift/reduce conflict (shift 71, reduce 21) on '>'
-81: shift/reduce conflict (shift 72, reduce 21) on '%'
-state 81
-	expr : ID LA expr .  (21)
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+80: shift/reduce conflict (shift 54, reduce 21) on OR
+80: shift/reduce conflict (shift 55, reduce 21) on AN
+80: shift/reduce conflict (shift 56, reduce 21) on EQ
+80: shift/reduce conflict (shift 57, reduce 21) on NE
+80: shift/reduce conflict (shift 58, reduce 21) on LE
+80: shift/reduce conflict (shift 59, reduce 21) on GE
+80: shift/reduce conflict (shift 60, reduce 21) on LS
+80: shift/reduce conflict (shift 61, reduce 21) on RS
+80: shift/reduce conflict (shift 62, reduce 21) on '&'
+80: shift/reduce conflict (shift 63, reduce 21) on '|'
+80: shift/reduce conflict (shift 64, reduce 21) on '+'
+80: shift/reduce conflict (shift 65, reduce 21) on '-'
+80: shift/reduce conflict (shift 66, reduce 21) on '*'
+80: shift/reduce conflict (shift 67, reduce 21) on '/'
+80: shift/reduce conflict (shift 69, reduce 21) on '^'
+80: shift/reduce conflict (shift 70, reduce 21) on '<'
+80: shift/reduce conflict (shift 71, reduce 21) on '>'
+80: shift/reduce conflict (shift 72, reduce 21) on '%'
+state 80
+	expr : ID OA expr .  (21)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
 
 	OR  shift 54
 	AN  shift 55
@@ -2092,44 +2036,44 @@ state 81
 	')'  reduce 21
 
 
-82: shift/reduce conflict (shift 54, reduce 22) on OR
-82: shift/reduce conflict (shift 55, reduce 22) on AN
-82: shift/reduce conflict (shift 56, reduce 22) on EQ
-82: shift/reduce conflict (shift 57, reduce 22) on NE
-82: shift/reduce conflict (shift 58, reduce 22) on LE
-82: shift/reduce conflict (shift 59, reduce 22) on GE
-82: shift/reduce conflict (shift 60, reduce 22) on LS
-82: shift/reduce conflict (shift 61, reduce 22) on RS
-82: shift/reduce conflict (shift 62, reduce 22) on '&'
-82: shift/reduce conflict (shift 63, reduce 22) on '|'
-82: shift/reduce conflict (shift 64, reduce 22) on '+'
-82: shift/reduce conflict (shift 65, reduce 22) on '-'
-82: shift/reduce conflict (shift 66, reduce 22) on '*'
-82: shift/reduce conflict (shift 67, reduce 22) on '/'
-82: shift/reduce conflict (shift 69, reduce 22) on '^'
-82: shift/reduce conflict (shift 70, reduce 22) on '<'
-82: shift/reduce conflict (shift 71, reduce 22) on '>'
-82: shift/reduce conflict (shift 72, reduce 22) on '%'
-state 82
-	expr : ID RA expr .  (22)
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+81: shift/reduce conflict (shift 54, reduce 22) on OR
+81: shift/reduce conflict (shift 55, reduce 22) on AN
+81: shift/reduce conflict (shift 56, reduce 22) on EQ
+81: shift/reduce conflict (shift 57, reduce 22) on NE
+81: shift/reduce conflict (shift 58, reduce 22) on LE
+81: shift/reduce conflict (shift 59, reduce 22) on GE
+81: shift/reduce conflict (shift 60, reduce 22) on LS
+81: shift/reduce conflict (shift 61, reduce 22) on RS
+81: shift/reduce conflict (shift 62, reduce 22) on '&'
+81: shift/reduce conflict (shift 63, reduce 22) on '|'
+81: shift/reduce conflict (shift 64, reduce 22) on '+'
+81: shift/reduce conflict (shift 65, reduce 22) on '-'
+81: shift/reduce conflict (shift 66, reduce 22) on '*'
+81: shift/reduce conflict (shift 67, reduce 22) on '/'
+81: shift/reduce conflict (shift 69, reduce 22) on '^'
+81: shift/reduce conflict (shift 70, reduce 22) on '<'
+81: shift/reduce conflict (shift 71, reduce 22) on '>'
+81: shift/reduce conflict (shift 72, reduce 22) on '%'
+state 81
+	expr : ID LA expr .  (22)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
 
 	OR  shift 54
 	AN  shift 55
@@ -2153,44 +2097,44 @@ state 82
 	')'  reduce 22
 
 
-83: shift/reduce conflict (shift 54, reduce 12) on OR
-83: shift/reduce conflict (shift 55, reduce 12) on AN
-83: shift/reduce conflict (shift 56, reduce 12) on EQ
-83: shift/reduce conflict (shift 57, reduce 12) on NE
-83: shift/reduce conflict (shift 58, reduce 12) on LE
-83: shift/reduce conflict (shift 59, reduce 12) on GE
-83: shift/reduce conflict (shift 60, reduce 12) on LS
-83: shift/reduce conflict (shift 61, reduce 12) on RS
-83: shift/reduce conflict (shift 62, reduce 12) on '&'
-83: shift/reduce conflict (shift 63, reduce 12) on '|'
-83: shift/reduce conflict (shift 64, reduce 12) on '+'
-83: shift/reduce conflict (shift 65, reduce 12) on '-'
-83: shift/reduce conflict (shift 66, reduce 12) on '*'
-83: shift/reduce conflict (shift 67, reduce 12) on '/'
-83: shift/reduce conflict (shift 69, reduce 12) on '^'
-83: shift/reduce conflict (shift 70, reduce 12) on '<'
-83: shift/reduce conflict (shift 71, reduce 12) on '>'
-83: shift/reduce conflict (shift 72, reduce 12) on '%'
-state 83
-	expr : ID '=' expr .  (12)
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+82: shift/reduce conflict (shift 54, reduce 23) on OR
+82: shift/reduce conflict (shift 55, reduce 23) on AN
+82: shift/reduce conflict (shift 56, reduce 23) on EQ
+82: shift/reduce conflict (shift 57, reduce 23) on NE
+82: shift/reduce conflict (shift 58, reduce 23) on LE
+82: shift/reduce conflict (shift 59, reduce 23) on GE
+82: shift/reduce conflict (shift 60, reduce 23) on LS
+82: shift/reduce conflict (shift 61, reduce 23) on RS
+82: shift/reduce conflict (shift 62, reduce 23) on '&'
+82: shift/reduce conflict (shift 63, reduce 23) on '|'
+82: shift/reduce conflict (shift 64, reduce 23) on '+'
+82: shift/reduce conflict (shift 65, reduce 23) on '-'
+82: shift/reduce conflict (shift 66, reduce 23) on '*'
+82: shift/reduce conflict (shift 67, reduce 23) on '/'
+82: shift/reduce conflict (shift 69, reduce 23) on '^'
+82: shift/reduce conflict (shift 70, reduce 23) on '<'
+82: shift/reduce conflict (shift 71, reduce 23) on '>'
+82: shift/reduce conflict (shift 72, reduce 23) on '%'
+state 82
+	expr : ID RA expr .  (23)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
 
 	OR  shift 54
 	AN  shift 55
@@ -2210,37 +2154,98 @@ state 83
 	'<'  shift 70
 	'>'  shift 71
 	'%'  shift 72
-	';'  reduce 12
-	')'  reduce 12
+	';'  reduce 23
+	')'  reduce 23
+
+
+83: shift/reduce conflict (shift 54, reduce 13) on OR
+83: shift/reduce conflict (shift 55, reduce 13) on AN
+83: shift/reduce conflict (shift 56, reduce 13) on EQ
+83: shift/reduce conflict (shift 57, reduce 13) on NE
+83: shift/reduce conflict (shift 58, reduce 13) on LE
+83: shift/reduce conflict (shift 59, reduce 13) on GE
+83: shift/reduce conflict (shift 60, reduce 13) on LS
+83: shift/reduce conflict (shift 61, reduce 13) on RS
+83: shift/reduce conflict (shift 62, reduce 13) on '&'
+83: shift/reduce conflict (shift 63, reduce 13) on '|'
+83: shift/reduce conflict (shift 64, reduce 13) on '+'
+83: shift/reduce conflict (shift 65, reduce 13) on '-'
+83: shift/reduce conflict (shift 66, reduce 13) on '*'
+83: shift/reduce conflict (shift 67, reduce 13) on '/'
+83: shift/reduce conflict (shift 69, reduce 13) on '^'
+83: shift/reduce conflict (shift 70, reduce 13) on '<'
+83: shift/reduce conflict (shift 71, reduce 13) on '>'
+83: shift/reduce conflict (shift 72, reduce 13) on '%'
+state 83
+	expr : ID '=' expr .  (13)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+
+	OR  shift 54
+	AN  shift 55
+	EQ  shift 56
+	NE  shift 57
+	LE  shift 58
+	GE  shift 59
+	LS  shift 60
+	RS  shift 61
+	'&'  shift 62
+	'|'  shift 63
+	'+'  shift 64
+	'-'  shift 65
+	'*'  shift 66
+	'/'  shift 67
+	'^'  shift 69
+	'<'  shift 70
+	'>'  shift 71
+	'%'  shift 72
+	';'  reduce 13
+	')'  reduce 13
 
 
 state 84
-	stmt : DO stmt WHILE . '(' expr ')' ';'  (7)
+	stmt : DO L stmt . WHILE '(' expr M N L ')' ';'  (8)
 
-	'('  shift 109
+	WHILE  shift 109
 	.  error
 
 
 state 85
-	stmt : FOR '(' expr . ';' expr ';' expr ')' stmt  (8)
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+	stmt : FOR '(' expr . ';' L expr M N ';' L expr N ')' L stmt N L  (9)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
 
 	OR  shift 54
 	AN  shift 55
@@ -2266,25 +2271,26 @@ state 85
 
 state 86
 	stmt : IF '(' expr . M ')' stmt N ELSE L stmt L  (5)
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-	M : .  (58)
+	stmt : IF '(' expr . M ')' stmt L  (6)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+	M : .  (59)
 
 	OR  shift 54
 	AN  shift 55
@@ -2304,19 +2310,19 @@ state 86
 	'<'  shift 70
 	'>'  shift 71
 	'%'  shift 72
-	')'  reduce 58
+	')'  reduce 59
 
 	M  goto 111
 
 
 state 87
-	stmt : RETURN expr ';' .  (9)
+	stmt : RETURN expr ';' .  (10)
 
-	.  reduce 9
+	.  reduce 10
 
 
 state 88
-	stmt : WHILE '(' L . expr M ')' stmt N L  (6)
+	stmt : WHILE '(' L . expr M ')' stmt N L  (7)
 
 	ID  shift 3
 	INT8  shift 4
@@ -2338,47 +2344,47 @@ state 88
 
 
 state 89
-	expr : '(' expr ')' .  (45)
+	expr : '(' expr ')' .  (46)
 
-	.  reduce 45
+	.  reduce 46
 
 
 state 90
-	stmt : '{' stmts '}' .  (10)
+	stmt : '{' stmts '}' .  (11)
 
-	.  reduce 10
+	.  reduce 11
 
 
-91: shift/reduce conflict (shift 56, reduce 23) on EQ
-91: shift/reduce conflict (shift 57, reduce 23) on NE
-91: shift/reduce conflict (shift 58, reduce 23) on LE
-91: shift/reduce conflict (shift 59, reduce 23) on GE
-91: shift/reduce conflict (shift 60, reduce 23) on LS
-91: shift/reduce conflict (shift 61, reduce 23) on RS
-91: shift/reduce conflict (shift 69, reduce 23) on '^'
-91: shift/reduce conflict (shift 70, reduce 23) on '<'
-91: shift/reduce conflict (shift 71, reduce 23) on '>'
-91: shift/reduce conflict (shift 72, reduce 23) on '%'
+91: shift/reduce conflict (shift 56, reduce 24) on EQ
+91: shift/reduce conflict (shift 57, reduce 24) on NE
+91: shift/reduce conflict (shift 58, reduce 24) on LE
+91: shift/reduce conflict (shift 59, reduce 24) on GE
+91: shift/reduce conflict (shift 60, reduce 24) on LS
+91: shift/reduce conflict (shift 61, reduce 24) on RS
+91: shift/reduce conflict (shift 69, reduce 24) on '^'
+91: shift/reduce conflict (shift 70, reduce 24) on '<'
+91: shift/reduce conflict (shift 71, reduce 24) on '>'
+91: shift/reduce conflict (shift 72, reduce 24) on '%'
 state 91
-	expr : expr . OR expr  (23)
-	expr : expr OR expr .  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+	expr : expr . OR expr  (24)
+	expr : expr OR expr .  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
 
 	EQ  shift 56
 	NE  shift 57
@@ -2394,115 +2400,52 @@ state 91
 	'<'  shift 70
 	'>'  shift 71
 	'%'  shift 72
-	OR  reduce 23
-	AN  reduce 23
-	'&'  reduce 23
-	'|'  reduce 23
-	';'  reduce 23
-	')'  reduce 23
-
-
-92: shift/reduce conflict (shift 56, reduce 24) on EQ
-92: shift/reduce conflict (shift 57, reduce 24) on NE
-92: shift/reduce conflict (shift 58, reduce 24) on LE
-92: shift/reduce conflict (shift 59, reduce 24) on GE
-92: shift/reduce conflict (shift 60, reduce 24) on LS
-92: shift/reduce conflict (shift 61, reduce 24) on RS
-92: shift/reduce conflict (shift 69, reduce 24) on '^'
-92: shift/reduce conflict (shift 70, reduce 24) on '<'
-92: shift/reduce conflict (shift 71, reduce 24) on '>'
-92: shift/reduce conflict (shift 72, reduce 24) on '%'
-state 92
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr AN expr .  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-
-	OR  shift 54
-	EQ  shift 56
-	NE  shift 57
-	LE  shift 58
-	GE  shift 59
-	LS  shift 60
-	RS  shift 61
-	'|'  shift 63
-	'+'  shift 64
-	'-'  shift 65
-	'*'  shift 66
-	'/'  shift 67
-	'^'  shift 69
-	'<'  shift 70
-	'>'  shift 71
-	'%'  shift 72
+	OR  reduce 24
 	AN  reduce 24
 	'&'  reduce 24
+	'|'  reduce 24
 	';'  reduce 24
 	')'  reduce 24
 
 
-93: shift/reduce conflict (shift 54, reduce 28) on OR
-93: shift/reduce conflict (shift 55, reduce 28) on AN
-93: shift/reduce conflict (shift 56, reduce 28) on EQ
-93: shift/reduce conflict (shift 57, reduce 28) on NE
-93: shift/reduce conflict (shift 58, reduce 28) on LE
-93: shift/reduce conflict (shift 59, reduce 28) on GE
-93: shift/reduce conflict (shift 60, reduce 28) on LS
-93: shift/reduce conflict (shift 61, reduce 28) on RS
-93: shift/reduce conflict (shift 62, reduce 28) on '&'
-93: shift/reduce conflict (shift 63, reduce 28) on '|'
-93: shift/reduce conflict (shift 64, reduce 28) on '+'
-93: shift/reduce conflict (shift 65, reduce 28) on '-'
-93: shift/reduce conflict (shift 66, reduce 28) on '*'
-93: shift/reduce conflict (shift 67, reduce 28) on '/'
-93: shift/reduce conflict (shift 69, reduce 28) on '^'
-93: shift/reduce conflict (shift 70, reduce 28) on '<'
-93: shift/reduce conflict (shift 71, reduce 28) on '>'
-93: shift/reduce conflict (shift 72, reduce 28) on '%'
-state 93
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr EQ expr .  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+92: shift/reduce conflict (shift 56, reduce 25) on EQ
+92: shift/reduce conflict (shift 57, reduce 25) on NE
+92: shift/reduce conflict (shift 58, reduce 25) on LE
+92: shift/reduce conflict (shift 59, reduce 25) on GE
+92: shift/reduce conflict (shift 60, reduce 25) on LS
+92: shift/reduce conflict (shift 61, reduce 25) on RS
+92: shift/reduce conflict (shift 69, reduce 25) on '^'
+92: shift/reduce conflict (shift 70, reduce 25) on '<'
+92: shift/reduce conflict (shift 71, reduce 25) on '>'
+92: shift/reduce conflict (shift 72, reduce 25) on '%'
+state 92
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr AN expr .  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
 
 	OR  shift 54
-	AN  shift 55
 	EQ  shift 56
 	NE  shift 57
 	LE  shift 58
 	GE  shift 59
 	LS  shift 60
 	RS  shift 61
-	'&'  shift 62
 	'|'  shift 63
 	'+'  shift 64
 	'-'  shift 65
@@ -2512,48 +2455,50 @@ state 93
 	'<'  shift 70
 	'>'  shift 71
 	'%'  shift 72
-	';'  reduce 28
-	')'  reduce 28
+	AN  reduce 25
+	'&'  reduce 25
+	';'  reduce 25
+	')'  reduce 25
 
 
-94: shift/reduce conflict (shift 54, reduce 29) on OR
-94: shift/reduce conflict (shift 55, reduce 29) on AN
-94: shift/reduce conflict (shift 56, reduce 29) on EQ
-94: shift/reduce conflict (shift 57, reduce 29) on NE
-94: shift/reduce conflict (shift 58, reduce 29) on LE
-94: shift/reduce conflict (shift 59, reduce 29) on GE
-94: shift/reduce conflict (shift 60, reduce 29) on LS
-94: shift/reduce conflict (shift 61, reduce 29) on RS
-94: shift/reduce conflict (shift 62, reduce 29) on '&'
-94: shift/reduce conflict (shift 63, reduce 29) on '|'
-94: shift/reduce conflict (shift 64, reduce 29) on '+'
-94: shift/reduce conflict (shift 65, reduce 29) on '-'
-94: shift/reduce conflict (shift 66, reduce 29) on '*'
-94: shift/reduce conflict (shift 67, reduce 29) on '/'
-94: shift/reduce conflict (shift 69, reduce 29) on '^'
-94: shift/reduce conflict (shift 70, reduce 29) on '<'
-94: shift/reduce conflict (shift 71, reduce 29) on '>'
-94: shift/reduce conflict (shift 72, reduce 29) on '%'
-state 94
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr NE expr .  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+93: shift/reduce conflict (shift 54, reduce 29) on OR
+93: shift/reduce conflict (shift 55, reduce 29) on AN
+93: shift/reduce conflict (shift 56, reduce 29) on EQ
+93: shift/reduce conflict (shift 57, reduce 29) on NE
+93: shift/reduce conflict (shift 58, reduce 29) on LE
+93: shift/reduce conflict (shift 59, reduce 29) on GE
+93: shift/reduce conflict (shift 60, reduce 29) on LS
+93: shift/reduce conflict (shift 61, reduce 29) on RS
+93: shift/reduce conflict (shift 62, reduce 29) on '&'
+93: shift/reduce conflict (shift 63, reduce 29) on '|'
+93: shift/reduce conflict (shift 64, reduce 29) on '+'
+93: shift/reduce conflict (shift 65, reduce 29) on '-'
+93: shift/reduce conflict (shift 66, reduce 29) on '*'
+93: shift/reduce conflict (shift 67, reduce 29) on '/'
+93: shift/reduce conflict (shift 69, reduce 29) on '^'
+93: shift/reduce conflict (shift 70, reduce 29) on '<'
+93: shift/reduce conflict (shift 71, reduce 29) on '>'
+93: shift/reduce conflict (shift 72, reduce 29) on '%'
+state 93
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr EQ expr .  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
 
 	OR  shift 54
 	AN  shift 55
@@ -2577,667 +2522,44 @@ state 94
 	')'  reduce 29
 
 
-95: shift/reduce conflict (shift 54, reduce 32) on OR
-95: shift/reduce conflict (shift 55, reduce 32) on AN
-95: shift/reduce conflict (shift 56, reduce 32) on EQ
-95: shift/reduce conflict (shift 57, reduce 32) on NE
-95: shift/reduce conflict (shift 58, reduce 32) on LE
-95: shift/reduce conflict (shift 59, reduce 32) on GE
-95: shift/reduce conflict (shift 60, reduce 32) on LS
-95: shift/reduce conflict (shift 61, reduce 32) on RS
-95: shift/reduce conflict (shift 62, reduce 32) on '&'
-95: shift/reduce conflict (shift 63, reduce 32) on '|'
-95: shift/reduce conflict (shift 64, reduce 32) on '+'
-95: shift/reduce conflict (shift 65, reduce 32) on '-'
-95: shift/reduce conflict (shift 66, reduce 32) on '*'
-95: shift/reduce conflict (shift 67, reduce 32) on '/'
-95: shift/reduce conflict (shift 69, reduce 32) on '^'
-95: shift/reduce conflict (shift 70, reduce 32) on '<'
-95: shift/reduce conflict (shift 71, reduce 32) on '>'
-95: shift/reduce conflict (shift 72, reduce 32) on '%'
-state 95
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr LE expr .  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-
-	OR  shift 54
-	AN  shift 55
-	EQ  shift 56
-	NE  shift 57
-	LE  shift 58
-	GE  shift 59
-	LS  shift 60
-	RS  shift 61
-	'&'  shift 62
-	'|'  shift 63
-	'+'  shift 64
-	'-'  shift 65
-	'*'  shift 66
-	'/'  shift 67
-	'^'  shift 69
-	'<'  shift 70
-	'>'  shift 71
-	'%'  shift 72
-	';'  reduce 32
-	')'  reduce 32
-
-
-96: shift/reduce conflict (shift 54, reduce 33) on OR
-96: shift/reduce conflict (shift 55, reduce 33) on AN
-96: shift/reduce conflict (shift 56, reduce 33) on EQ
-96: shift/reduce conflict (shift 57, reduce 33) on NE
-96: shift/reduce conflict (shift 58, reduce 33) on LE
-96: shift/reduce conflict (shift 59, reduce 33) on GE
-96: shift/reduce conflict (shift 60, reduce 33) on LS
-96: shift/reduce conflict (shift 61, reduce 33) on RS
-96: shift/reduce conflict (shift 62, reduce 33) on '&'
-96: shift/reduce conflict (shift 63, reduce 33) on '|'
-96: shift/reduce conflict (shift 64, reduce 33) on '+'
-96: shift/reduce conflict (shift 65, reduce 33) on '-'
-96: shift/reduce conflict (shift 66, reduce 33) on '*'
-96: shift/reduce conflict (shift 67, reduce 33) on '/'
-96: shift/reduce conflict (shift 69, reduce 33) on '^'
-96: shift/reduce conflict (shift 70, reduce 33) on '<'
-96: shift/reduce conflict (shift 71, reduce 33) on '>'
-96: shift/reduce conflict (shift 72, reduce 33) on '%'
-state 96
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr GE expr .  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-
-	OR  shift 54
-	AN  shift 55
-	EQ  shift 56
-	NE  shift 57
-	LE  shift 58
-	GE  shift 59
-	LS  shift 60
-	RS  shift 61
-	'&'  shift 62
-	'|'  shift 63
-	'+'  shift 64
-	'-'  shift 65
-	'*'  shift 66
-	'/'  shift 67
-	'^'  shift 69
-	'<'  shift 70
-	'>'  shift 71
-	'%'  shift 72
-	';'  reduce 33
-	')'  reduce 33
-
-
-97: shift/reduce conflict (shift 54, reduce 34) on OR
-97: shift/reduce conflict (shift 55, reduce 34) on AN
-97: shift/reduce conflict (shift 56, reduce 34) on EQ
-97: shift/reduce conflict (shift 57, reduce 34) on NE
-97: shift/reduce conflict (shift 58, reduce 34) on LE
-97: shift/reduce conflict (shift 59, reduce 34) on GE
-97: shift/reduce conflict (shift 60, reduce 34) on LS
-97: shift/reduce conflict (shift 61, reduce 34) on RS
-97: shift/reduce conflict (shift 62, reduce 34) on '&'
-97: shift/reduce conflict (shift 63, reduce 34) on '|'
-97: shift/reduce conflict (shift 64, reduce 34) on '+'
-97: shift/reduce conflict (shift 65, reduce 34) on '-'
-97: shift/reduce conflict (shift 66, reduce 34) on '*'
-97: shift/reduce conflict (shift 67, reduce 34) on '/'
-97: shift/reduce conflict (shift 69, reduce 34) on '^'
-97: shift/reduce conflict (shift 70, reduce 34) on '<'
-97: shift/reduce conflict (shift 71, reduce 34) on '>'
-97: shift/reduce conflict (shift 72, reduce 34) on '%'
-state 97
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr LS expr .  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-
-	OR  shift 54
-	AN  shift 55
-	EQ  shift 56
-	NE  shift 57
-	LE  shift 58
-	GE  shift 59
-	LS  shift 60
-	RS  shift 61
-	'&'  shift 62
-	'|'  shift 63
-	'+'  shift 64
-	'-'  shift 65
-	'*'  shift 66
-	'/'  shift 67
-	'^'  shift 69
-	'<'  shift 70
-	'>'  shift 71
-	'%'  shift 72
-	';'  reduce 34
-	')'  reduce 34
-
-
-98: shift/reduce conflict (shift 54, reduce 35) on OR
-98: shift/reduce conflict (shift 55, reduce 35) on AN
-98: shift/reduce conflict (shift 56, reduce 35) on EQ
-98: shift/reduce conflict (shift 57, reduce 35) on NE
-98: shift/reduce conflict (shift 58, reduce 35) on LE
-98: shift/reduce conflict (shift 59, reduce 35) on GE
-98: shift/reduce conflict (shift 60, reduce 35) on LS
-98: shift/reduce conflict (shift 61, reduce 35) on RS
-98: shift/reduce conflict (shift 62, reduce 35) on '&'
-98: shift/reduce conflict (shift 63, reduce 35) on '|'
-98: shift/reduce conflict (shift 64, reduce 35) on '+'
-98: shift/reduce conflict (shift 65, reduce 35) on '-'
-98: shift/reduce conflict (shift 66, reduce 35) on '*'
-98: shift/reduce conflict (shift 67, reduce 35) on '/'
-98: shift/reduce conflict (shift 69, reduce 35) on '^'
-98: shift/reduce conflict (shift 70, reduce 35) on '<'
-98: shift/reduce conflict (shift 71, reduce 35) on '>'
-98: shift/reduce conflict (shift 72, reduce 35) on '%'
-state 98
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr RS expr .  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-
-	OR  shift 54
-	AN  shift 55
-	EQ  shift 56
-	NE  shift 57
-	LE  shift 58
-	GE  shift 59
-	LS  shift 60
-	RS  shift 61
-	'&'  shift 62
-	'|'  shift 63
-	'+'  shift 64
-	'-'  shift 65
-	'*'  shift 66
-	'/'  shift 67
-	'^'  shift 69
-	'<'  shift 70
-	'>'  shift 71
-	'%'  shift 72
-	';'  reduce 35
-	')'  reduce 35
-
-
-99: shift/reduce conflict (shift 56, reduce 27) on EQ
-99: shift/reduce conflict (shift 57, reduce 27) on NE
-99: shift/reduce conflict (shift 58, reduce 27) on LE
-99: shift/reduce conflict (shift 59, reduce 27) on GE
-99: shift/reduce conflict (shift 60, reduce 27) on LS
-99: shift/reduce conflict (shift 61, reduce 27) on RS
-99: shift/reduce conflict (shift 69, reduce 27) on '^'
-99: shift/reduce conflict (shift 70, reduce 27) on '<'
-99: shift/reduce conflict (shift 71, reduce 27) on '>'
-99: shift/reduce conflict (shift 72, reduce 27) on '%'
-state 99
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr '&' expr .  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-
-	OR  shift 54
-	EQ  shift 56
-	NE  shift 57
-	LE  shift 58
-	GE  shift 59
-	LS  shift 60
-	RS  shift 61
-	'|'  shift 63
-	'+'  shift 64
-	'-'  shift 65
-	'*'  shift 66
-	'/'  shift 67
-	'^'  shift 69
-	'<'  shift 70
-	'>'  shift 71
-	'%'  shift 72
-	AN  reduce 27
-	'&'  reduce 27
-	';'  reduce 27
-	')'  reduce 27
-
-
-100: shift/reduce conflict (shift 56, reduce 25) on EQ
-100: shift/reduce conflict (shift 57, reduce 25) on NE
-100: shift/reduce conflict (shift 58, reduce 25) on LE
-100: shift/reduce conflict (shift 59, reduce 25) on GE
-100: shift/reduce conflict (shift 60, reduce 25) on LS
-100: shift/reduce conflict (shift 61, reduce 25) on RS
-100: shift/reduce conflict (shift 69, reduce 25) on '^'
-100: shift/reduce conflict (shift 70, reduce 25) on '<'
-100: shift/reduce conflict (shift 71, reduce 25) on '>'
-100: shift/reduce conflict (shift 72, reduce 25) on '%'
-state 100
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr '|' expr .  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-
-	EQ  shift 56
-	NE  shift 57
-	LE  shift 58
-	GE  shift 59
-	LS  shift 60
-	RS  shift 61
-	'+'  shift 64
-	'-'  shift 65
-	'*'  shift 66
-	'/'  shift 67
-	'^'  shift 69
-	'<'  shift 70
-	'>'  shift 71
-	'%'  shift 72
-	OR  reduce 25
-	AN  reduce 25
-	'&'  reduce 25
-	'|'  reduce 25
-	';'  reduce 25
-	')'  reduce 25
-
-
-101: shift/reduce conflict (shift 56, reduce 36) on EQ
-101: shift/reduce conflict (shift 57, reduce 36) on NE
-101: shift/reduce conflict (shift 58, reduce 36) on LE
-101: shift/reduce conflict (shift 59, reduce 36) on GE
-101: shift/reduce conflict (shift 60, reduce 36) on LS
-101: shift/reduce conflict (shift 61, reduce 36) on RS
-101: shift/reduce conflict (shift 69, reduce 36) on '^'
-101: shift/reduce conflict (shift 70, reduce 36) on '<'
-101: shift/reduce conflict (shift 71, reduce 36) on '>'
-101: shift/reduce conflict (shift 72, reduce 36) on '%'
-state 101
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr '+' expr .  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-
-	EQ  shift 56
-	NE  shift 57
-	LE  shift 58
-	GE  shift 59
-	LS  shift 60
-	RS  shift 61
-	'*'  shift 66
-	'/'  shift 67
-	'^'  shift 69
-	'<'  shift 70
-	'>'  shift 71
-	'%'  shift 72
-	OR  reduce 36
-	AN  reduce 36
-	'&'  reduce 36
-	'|'  reduce 36
-	'+'  reduce 36
-	'-'  reduce 36
-	';'  reduce 36
-	')'  reduce 36
-
-
-102: shift/reduce conflict (shift 56, reduce 37) on EQ
-102: shift/reduce conflict (shift 57, reduce 37) on NE
-102: shift/reduce conflict (shift 58, reduce 37) on LE
-102: shift/reduce conflict (shift 59, reduce 37) on GE
-102: shift/reduce conflict (shift 60, reduce 37) on LS
-102: shift/reduce conflict (shift 61, reduce 37) on RS
-102: shift/reduce conflict (shift 69, reduce 37) on '^'
-102: shift/reduce conflict (shift 70, reduce 37) on '<'
-102: shift/reduce conflict (shift 71, reduce 37) on '>'
-102: shift/reduce conflict (shift 72, reduce 37) on '%'
-state 102
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr '-' expr .  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-
-	EQ  shift 56
-	NE  shift 57
-	LE  shift 58
-	GE  shift 59
-	LS  shift 60
-	RS  shift 61
-	'*'  shift 66
-	'/'  shift 67
-	'^'  shift 69
-	'<'  shift 70
-	'>'  shift 71
-	'%'  shift 72
-	OR  reduce 37
-	AN  reduce 37
-	'&'  reduce 37
-	'|'  reduce 37
-	'+'  reduce 37
-	'-'  reduce 37
-	';'  reduce 37
-	')'  reduce 37
-
-
-103: shift/reduce conflict (shift 56, reduce 38) on EQ
-103: shift/reduce conflict (shift 57, reduce 38) on NE
-103: shift/reduce conflict (shift 58, reduce 38) on LE
-103: shift/reduce conflict (shift 59, reduce 38) on GE
-103: shift/reduce conflict (shift 60, reduce 38) on LS
-103: shift/reduce conflict (shift 61, reduce 38) on RS
-103: shift/reduce conflict (shift 69, reduce 38) on '^'
-103: shift/reduce conflict (shift 70, reduce 38) on '<'
-103: shift/reduce conflict (shift 71, reduce 38) on '>'
-103: shift/reduce conflict (shift 72, reduce 38) on '%'
-state 103
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr '*' expr .  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-
-	EQ  shift 56
-	NE  shift 57
-	LE  shift 58
-	GE  shift 59
-	LS  shift 60
-	RS  shift 61
-	'^'  shift 69
-	'<'  shift 70
-	'>'  shift 71
-	'%'  shift 72
-	OR  reduce 38
-	AN  reduce 38
-	'&'  reduce 38
-	'|'  reduce 38
-	'+'  reduce 38
-	'-'  reduce 38
-	'*'  reduce 38
-	'/'  reduce 38
-	';'  reduce 38
-	')'  reduce 38
-
-
-104: shift/reduce conflict (shift 56, reduce 39) on EQ
-104: shift/reduce conflict (shift 57, reduce 39) on NE
-104: shift/reduce conflict (shift 58, reduce 39) on LE
-104: shift/reduce conflict (shift 59, reduce 39) on GE
-104: shift/reduce conflict (shift 60, reduce 39) on LS
-104: shift/reduce conflict (shift 61, reduce 39) on RS
-104: shift/reduce conflict (shift 69, reduce 39) on '^'
-104: shift/reduce conflict (shift 70, reduce 39) on '<'
-104: shift/reduce conflict (shift 71, reduce 39) on '>'
-104: shift/reduce conflict (shift 72, reduce 39) on '%'
-state 104
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr '/' expr .  (39)
-	expr : expr . '%' expr  (40)
-
-	EQ  shift 56
-	NE  shift 57
-	LE  shift 58
-	GE  shift 59
-	LS  shift 60
-	RS  shift 61
-	'^'  shift 69
-	'<'  shift 70
-	'>'  shift 71
-	'%'  shift 72
-	OR  reduce 39
-	AN  reduce 39
-	'&'  reduce 39
-	'|'  reduce 39
-	'+'  reduce 39
-	'-'  reduce 39
-	'*'  reduce 39
-	'/'  reduce 39
-	';'  reduce 39
-	')'  reduce 39
-
-
-105: shift/reduce conflict (shift 54, reduce 26) on OR
-105: shift/reduce conflict (shift 55, reduce 26) on AN
-105: shift/reduce conflict (shift 56, reduce 26) on EQ
-105: shift/reduce conflict (shift 57, reduce 26) on NE
-105: shift/reduce conflict (shift 58, reduce 26) on LE
-105: shift/reduce conflict (shift 59, reduce 26) on GE
-105: shift/reduce conflict (shift 60, reduce 26) on LS
-105: shift/reduce conflict (shift 61, reduce 26) on RS
-105: shift/reduce conflict (shift 62, reduce 26) on '&'
-105: shift/reduce conflict (shift 63, reduce 26) on '|'
-105: shift/reduce conflict (shift 64, reduce 26) on '+'
-105: shift/reduce conflict (shift 65, reduce 26) on '-'
-105: shift/reduce conflict (shift 66, reduce 26) on '*'
-105: shift/reduce conflict (shift 67, reduce 26) on '/'
-105: shift/reduce conflict (shift 69, reduce 26) on '^'
-105: shift/reduce conflict (shift 70, reduce 26) on '<'
-105: shift/reduce conflict (shift 71, reduce 26) on '>'
-105: shift/reduce conflict (shift 72, reduce 26) on '%'
-state 105
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr '^' expr .  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-
-	OR  shift 54
-	AN  shift 55
-	EQ  shift 56
-	NE  shift 57
-	LE  shift 58
-	GE  shift 59
-	LS  shift 60
-	RS  shift 61
-	'&'  shift 62
-	'|'  shift 63
-	'+'  shift 64
-	'-'  shift 65
-	'*'  shift 66
-	'/'  shift 67
-	'^'  shift 69
-	'<'  shift 70
-	'>'  shift 71
-	'%'  shift 72
-	';'  reduce 26
-	')'  reduce 26
-
-
-106: shift/reduce conflict (shift 54, reduce 30) on OR
-106: shift/reduce conflict (shift 55, reduce 30) on AN
-106: shift/reduce conflict (shift 56, reduce 30) on EQ
-106: shift/reduce conflict (shift 57, reduce 30) on NE
-106: shift/reduce conflict (shift 58, reduce 30) on LE
-106: shift/reduce conflict (shift 59, reduce 30) on GE
-106: shift/reduce conflict (shift 60, reduce 30) on LS
-106: shift/reduce conflict (shift 61, reduce 30) on RS
-106: shift/reduce conflict (shift 62, reduce 30) on '&'
-106: shift/reduce conflict (shift 63, reduce 30) on '|'
-106: shift/reduce conflict (shift 64, reduce 30) on '+'
-106: shift/reduce conflict (shift 65, reduce 30) on '-'
-106: shift/reduce conflict (shift 66, reduce 30) on '*'
-106: shift/reduce conflict (shift 67, reduce 30) on '/'
-106: shift/reduce conflict (shift 69, reduce 30) on '^'
-106: shift/reduce conflict (shift 70, reduce 30) on '<'
-106: shift/reduce conflict (shift 71, reduce 30) on '>'
-106: shift/reduce conflict (shift 72, reduce 30) on '%'
-state 106
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr '<' expr .  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+94: shift/reduce conflict (shift 54, reduce 30) on OR
+94: shift/reduce conflict (shift 55, reduce 30) on AN
+94: shift/reduce conflict (shift 56, reduce 30) on EQ
+94: shift/reduce conflict (shift 57, reduce 30) on NE
+94: shift/reduce conflict (shift 58, reduce 30) on LE
+94: shift/reduce conflict (shift 59, reduce 30) on GE
+94: shift/reduce conflict (shift 60, reduce 30) on LS
+94: shift/reduce conflict (shift 61, reduce 30) on RS
+94: shift/reduce conflict (shift 62, reduce 30) on '&'
+94: shift/reduce conflict (shift 63, reduce 30) on '|'
+94: shift/reduce conflict (shift 64, reduce 30) on '+'
+94: shift/reduce conflict (shift 65, reduce 30) on '-'
+94: shift/reduce conflict (shift 66, reduce 30) on '*'
+94: shift/reduce conflict (shift 67, reduce 30) on '/'
+94: shift/reduce conflict (shift 69, reduce 30) on '^'
+94: shift/reduce conflict (shift 70, reduce 30) on '<'
+94: shift/reduce conflict (shift 71, reduce 30) on '>'
+94: shift/reduce conflict (shift 72, reduce 30) on '%'
+state 94
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr NE expr .  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
 
 	OR  shift 54
 	AN  shift 55
@@ -3261,44 +2583,667 @@ state 106
 	')'  reduce 30
 
 
-107: shift/reduce conflict (shift 54, reduce 31) on OR
-107: shift/reduce conflict (shift 55, reduce 31) on AN
-107: shift/reduce conflict (shift 56, reduce 31) on EQ
-107: shift/reduce conflict (shift 57, reduce 31) on NE
-107: shift/reduce conflict (shift 58, reduce 31) on LE
-107: shift/reduce conflict (shift 59, reduce 31) on GE
-107: shift/reduce conflict (shift 60, reduce 31) on LS
-107: shift/reduce conflict (shift 61, reduce 31) on RS
-107: shift/reduce conflict (shift 62, reduce 31) on '&'
-107: shift/reduce conflict (shift 63, reduce 31) on '|'
-107: shift/reduce conflict (shift 64, reduce 31) on '+'
-107: shift/reduce conflict (shift 65, reduce 31) on '-'
-107: shift/reduce conflict (shift 66, reduce 31) on '*'
-107: shift/reduce conflict (shift 67, reduce 31) on '/'
-107: shift/reduce conflict (shift 69, reduce 31) on '^'
-107: shift/reduce conflict (shift 70, reduce 31) on '<'
-107: shift/reduce conflict (shift 71, reduce 31) on '>'
-107: shift/reduce conflict (shift 72, reduce 31) on '%'
-state 107
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr '>' expr .  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+95: shift/reduce conflict (shift 54, reduce 33) on OR
+95: shift/reduce conflict (shift 55, reduce 33) on AN
+95: shift/reduce conflict (shift 56, reduce 33) on EQ
+95: shift/reduce conflict (shift 57, reduce 33) on NE
+95: shift/reduce conflict (shift 58, reduce 33) on LE
+95: shift/reduce conflict (shift 59, reduce 33) on GE
+95: shift/reduce conflict (shift 60, reduce 33) on LS
+95: shift/reduce conflict (shift 61, reduce 33) on RS
+95: shift/reduce conflict (shift 62, reduce 33) on '&'
+95: shift/reduce conflict (shift 63, reduce 33) on '|'
+95: shift/reduce conflict (shift 64, reduce 33) on '+'
+95: shift/reduce conflict (shift 65, reduce 33) on '-'
+95: shift/reduce conflict (shift 66, reduce 33) on '*'
+95: shift/reduce conflict (shift 67, reduce 33) on '/'
+95: shift/reduce conflict (shift 69, reduce 33) on '^'
+95: shift/reduce conflict (shift 70, reduce 33) on '<'
+95: shift/reduce conflict (shift 71, reduce 33) on '>'
+95: shift/reduce conflict (shift 72, reduce 33) on '%'
+state 95
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr LE expr .  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+
+	OR  shift 54
+	AN  shift 55
+	EQ  shift 56
+	NE  shift 57
+	LE  shift 58
+	GE  shift 59
+	LS  shift 60
+	RS  shift 61
+	'&'  shift 62
+	'|'  shift 63
+	'+'  shift 64
+	'-'  shift 65
+	'*'  shift 66
+	'/'  shift 67
+	'^'  shift 69
+	'<'  shift 70
+	'>'  shift 71
+	'%'  shift 72
+	';'  reduce 33
+	')'  reduce 33
+
+
+96: shift/reduce conflict (shift 54, reduce 34) on OR
+96: shift/reduce conflict (shift 55, reduce 34) on AN
+96: shift/reduce conflict (shift 56, reduce 34) on EQ
+96: shift/reduce conflict (shift 57, reduce 34) on NE
+96: shift/reduce conflict (shift 58, reduce 34) on LE
+96: shift/reduce conflict (shift 59, reduce 34) on GE
+96: shift/reduce conflict (shift 60, reduce 34) on LS
+96: shift/reduce conflict (shift 61, reduce 34) on RS
+96: shift/reduce conflict (shift 62, reduce 34) on '&'
+96: shift/reduce conflict (shift 63, reduce 34) on '|'
+96: shift/reduce conflict (shift 64, reduce 34) on '+'
+96: shift/reduce conflict (shift 65, reduce 34) on '-'
+96: shift/reduce conflict (shift 66, reduce 34) on '*'
+96: shift/reduce conflict (shift 67, reduce 34) on '/'
+96: shift/reduce conflict (shift 69, reduce 34) on '^'
+96: shift/reduce conflict (shift 70, reduce 34) on '<'
+96: shift/reduce conflict (shift 71, reduce 34) on '>'
+96: shift/reduce conflict (shift 72, reduce 34) on '%'
+state 96
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr GE expr .  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+
+	OR  shift 54
+	AN  shift 55
+	EQ  shift 56
+	NE  shift 57
+	LE  shift 58
+	GE  shift 59
+	LS  shift 60
+	RS  shift 61
+	'&'  shift 62
+	'|'  shift 63
+	'+'  shift 64
+	'-'  shift 65
+	'*'  shift 66
+	'/'  shift 67
+	'^'  shift 69
+	'<'  shift 70
+	'>'  shift 71
+	'%'  shift 72
+	';'  reduce 34
+	')'  reduce 34
+
+
+97: shift/reduce conflict (shift 54, reduce 35) on OR
+97: shift/reduce conflict (shift 55, reduce 35) on AN
+97: shift/reduce conflict (shift 56, reduce 35) on EQ
+97: shift/reduce conflict (shift 57, reduce 35) on NE
+97: shift/reduce conflict (shift 58, reduce 35) on LE
+97: shift/reduce conflict (shift 59, reduce 35) on GE
+97: shift/reduce conflict (shift 60, reduce 35) on LS
+97: shift/reduce conflict (shift 61, reduce 35) on RS
+97: shift/reduce conflict (shift 62, reduce 35) on '&'
+97: shift/reduce conflict (shift 63, reduce 35) on '|'
+97: shift/reduce conflict (shift 64, reduce 35) on '+'
+97: shift/reduce conflict (shift 65, reduce 35) on '-'
+97: shift/reduce conflict (shift 66, reduce 35) on '*'
+97: shift/reduce conflict (shift 67, reduce 35) on '/'
+97: shift/reduce conflict (shift 69, reduce 35) on '^'
+97: shift/reduce conflict (shift 70, reduce 35) on '<'
+97: shift/reduce conflict (shift 71, reduce 35) on '>'
+97: shift/reduce conflict (shift 72, reduce 35) on '%'
+state 97
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr LS expr .  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+
+	OR  shift 54
+	AN  shift 55
+	EQ  shift 56
+	NE  shift 57
+	LE  shift 58
+	GE  shift 59
+	LS  shift 60
+	RS  shift 61
+	'&'  shift 62
+	'|'  shift 63
+	'+'  shift 64
+	'-'  shift 65
+	'*'  shift 66
+	'/'  shift 67
+	'^'  shift 69
+	'<'  shift 70
+	'>'  shift 71
+	'%'  shift 72
+	';'  reduce 35
+	')'  reduce 35
+
+
+98: shift/reduce conflict (shift 54, reduce 36) on OR
+98: shift/reduce conflict (shift 55, reduce 36) on AN
+98: shift/reduce conflict (shift 56, reduce 36) on EQ
+98: shift/reduce conflict (shift 57, reduce 36) on NE
+98: shift/reduce conflict (shift 58, reduce 36) on LE
+98: shift/reduce conflict (shift 59, reduce 36) on GE
+98: shift/reduce conflict (shift 60, reduce 36) on LS
+98: shift/reduce conflict (shift 61, reduce 36) on RS
+98: shift/reduce conflict (shift 62, reduce 36) on '&'
+98: shift/reduce conflict (shift 63, reduce 36) on '|'
+98: shift/reduce conflict (shift 64, reduce 36) on '+'
+98: shift/reduce conflict (shift 65, reduce 36) on '-'
+98: shift/reduce conflict (shift 66, reduce 36) on '*'
+98: shift/reduce conflict (shift 67, reduce 36) on '/'
+98: shift/reduce conflict (shift 69, reduce 36) on '^'
+98: shift/reduce conflict (shift 70, reduce 36) on '<'
+98: shift/reduce conflict (shift 71, reduce 36) on '>'
+98: shift/reduce conflict (shift 72, reduce 36) on '%'
+state 98
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr RS expr .  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+
+	OR  shift 54
+	AN  shift 55
+	EQ  shift 56
+	NE  shift 57
+	LE  shift 58
+	GE  shift 59
+	LS  shift 60
+	RS  shift 61
+	'&'  shift 62
+	'|'  shift 63
+	'+'  shift 64
+	'-'  shift 65
+	'*'  shift 66
+	'/'  shift 67
+	'^'  shift 69
+	'<'  shift 70
+	'>'  shift 71
+	'%'  shift 72
+	';'  reduce 36
+	')'  reduce 36
+
+
+99: shift/reduce conflict (shift 56, reduce 28) on EQ
+99: shift/reduce conflict (shift 57, reduce 28) on NE
+99: shift/reduce conflict (shift 58, reduce 28) on LE
+99: shift/reduce conflict (shift 59, reduce 28) on GE
+99: shift/reduce conflict (shift 60, reduce 28) on LS
+99: shift/reduce conflict (shift 61, reduce 28) on RS
+99: shift/reduce conflict (shift 69, reduce 28) on '^'
+99: shift/reduce conflict (shift 70, reduce 28) on '<'
+99: shift/reduce conflict (shift 71, reduce 28) on '>'
+99: shift/reduce conflict (shift 72, reduce 28) on '%'
+state 99
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr '&' expr .  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+
+	OR  shift 54
+	EQ  shift 56
+	NE  shift 57
+	LE  shift 58
+	GE  shift 59
+	LS  shift 60
+	RS  shift 61
+	'|'  shift 63
+	'+'  shift 64
+	'-'  shift 65
+	'*'  shift 66
+	'/'  shift 67
+	'^'  shift 69
+	'<'  shift 70
+	'>'  shift 71
+	'%'  shift 72
+	AN  reduce 28
+	'&'  reduce 28
+	';'  reduce 28
+	')'  reduce 28
+
+
+100: shift/reduce conflict (shift 56, reduce 26) on EQ
+100: shift/reduce conflict (shift 57, reduce 26) on NE
+100: shift/reduce conflict (shift 58, reduce 26) on LE
+100: shift/reduce conflict (shift 59, reduce 26) on GE
+100: shift/reduce conflict (shift 60, reduce 26) on LS
+100: shift/reduce conflict (shift 61, reduce 26) on RS
+100: shift/reduce conflict (shift 69, reduce 26) on '^'
+100: shift/reduce conflict (shift 70, reduce 26) on '<'
+100: shift/reduce conflict (shift 71, reduce 26) on '>'
+100: shift/reduce conflict (shift 72, reduce 26) on '%'
+state 100
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr '|' expr .  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+
+	EQ  shift 56
+	NE  shift 57
+	LE  shift 58
+	GE  shift 59
+	LS  shift 60
+	RS  shift 61
+	'+'  shift 64
+	'-'  shift 65
+	'*'  shift 66
+	'/'  shift 67
+	'^'  shift 69
+	'<'  shift 70
+	'>'  shift 71
+	'%'  shift 72
+	OR  reduce 26
+	AN  reduce 26
+	'&'  reduce 26
+	'|'  reduce 26
+	';'  reduce 26
+	')'  reduce 26
+
+
+101: shift/reduce conflict (shift 56, reduce 37) on EQ
+101: shift/reduce conflict (shift 57, reduce 37) on NE
+101: shift/reduce conflict (shift 58, reduce 37) on LE
+101: shift/reduce conflict (shift 59, reduce 37) on GE
+101: shift/reduce conflict (shift 60, reduce 37) on LS
+101: shift/reduce conflict (shift 61, reduce 37) on RS
+101: shift/reduce conflict (shift 69, reduce 37) on '^'
+101: shift/reduce conflict (shift 70, reduce 37) on '<'
+101: shift/reduce conflict (shift 71, reduce 37) on '>'
+101: shift/reduce conflict (shift 72, reduce 37) on '%'
+state 101
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr '+' expr .  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+
+	EQ  shift 56
+	NE  shift 57
+	LE  shift 58
+	GE  shift 59
+	LS  shift 60
+	RS  shift 61
+	'*'  shift 66
+	'/'  shift 67
+	'^'  shift 69
+	'<'  shift 70
+	'>'  shift 71
+	'%'  shift 72
+	OR  reduce 37
+	AN  reduce 37
+	'&'  reduce 37
+	'|'  reduce 37
+	'+'  reduce 37
+	'-'  reduce 37
+	';'  reduce 37
+	')'  reduce 37
+
+
+102: shift/reduce conflict (shift 56, reduce 38) on EQ
+102: shift/reduce conflict (shift 57, reduce 38) on NE
+102: shift/reduce conflict (shift 58, reduce 38) on LE
+102: shift/reduce conflict (shift 59, reduce 38) on GE
+102: shift/reduce conflict (shift 60, reduce 38) on LS
+102: shift/reduce conflict (shift 61, reduce 38) on RS
+102: shift/reduce conflict (shift 69, reduce 38) on '^'
+102: shift/reduce conflict (shift 70, reduce 38) on '<'
+102: shift/reduce conflict (shift 71, reduce 38) on '>'
+102: shift/reduce conflict (shift 72, reduce 38) on '%'
+state 102
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr '-' expr .  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+
+	EQ  shift 56
+	NE  shift 57
+	LE  shift 58
+	GE  shift 59
+	LS  shift 60
+	RS  shift 61
+	'*'  shift 66
+	'/'  shift 67
+	'^'  shift 69
+	'<'  shift 70
+	'>'  shift 71
+	'%'  shift 72
+	OR  reduce 38
+	AN  reduce 38
+	'&'  reduce 38
+	'|'  reduce 38
+	'+'  reduce 38
+	'-'  reduce 38
+	';'  reduce 38
+	')'  reduce 38
+
+
+103: shift/reduce conflict (shift 56, reduce 39) on EQ
+103: shift/reduce conflict (shift 57, reduce 39) on NE
+103: shift/reduce conflict (shift 58, reduce 39) on LE
+103: shift/reduce conflict (shift 59, reduce 39) on GE
+103: shift/reduce conflict (shift 60, reduce 39) on LS
+103: shift/reduce conflict (shift 61, reduce 39) on RS
+103: shift/reduce conflict (shift 69, reduce 39) on '^'
+103: shift/reduce conflict (shift 70, reduce 39) on '<'
+103: shift/reduce conflict (shift 71, reduce 39) on '>'
+103: shift/reduce conflict (shift 72, reduce 39) on '%'
+state 103
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr '*' expr .  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+
+	EQ  shift 56
+	NE  shift 57
+	LE  shift 58
+	GE  shift 59
+	LS  shift 60
+	RS  shift 61
+	'^'  shift 69
+	'<'  shift 70
+	'>'  shift 71
+	'%'  shift 72
+	OR  reduce 39
+	AN  reduce 39
+	'&'  reduce 39
+	'|'  reduce 39
+	'+'  reduce 39
+	'-'  reduce 39
+	'*'  reduce 39
+	'/'  reduce 39
+	';'  reduce 39
+	')'  reduce 39
+
+
+104: shift/reduce conflict (shift 56, reduce 40) on EQ
+104: shift/reduce conflict (shift 57, reduce 40) on NE
+104: shift/reduce conflict (shift 58, reduce 40) on LE
+104: shift/reduce conflict (shift 59, reduce 40) on GE
+104: shift/reduce conflict (shift 60, reduce 40) on LS
+104: shift/reduce conflict (shift 61, reduce 40) on RS
+104: shift/reduce conflict (shift 69, reduce 40) on '^'
+104: shift/reduce conflict (shift 70, reduce 40) on '<'
+104: shift/reduce conflict (shift 71, reduce 40) on '>'
+104: shift/reduce conflict (shift 72, reduce 40) on '%'
+state 104
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr '/' expr .  (40)
+	expr : expr . '%' expr  (41)
+
+	EQ  shift 56
+	NE  shift 57
+	LE  shift 58
+	GE  shift 59
+	LS  shift 60
+	RS  shift 61
+	'^'  shift 69
+	'<'  shift 70
+	'>'  shift 71
+	'%'  shift 72
+	OR  reduce 40
+	AN  reduce 40
+	'&'  reduce 40
+	'|'  reduce 40
+	'+'  reduce 40
+	'-'  reduce 40
+	'*'  reduce 40
+	'/'  reduce 40
+	';'  reduce 40
+	')'  reduce 40
+
+
+105: shift/reduce conflict (shift 54, reduce 27) on OR
+105: shift/reduce conflict (shift 55, reduce 27) on AN
+105: shift/reduce conflict (shift 56, reduce 27) on EQ
+105: shift/reduce conflict (shift 57, reduce 27) on NE
+105: shift/reduce conflict (shift 58, reduce 27) on LE
+105: shift/reduce conflict (shift 59, reduce 27) on GE
+105: shift/reduce conflict (shift 60, reduce 27) on LS
+105: shift/reduce conflict (shift 61, reduce 27) on RS
+105: shift/reduce conflict (shift 62, reduce 27) on '&'
+105: shift/reduce conflict (shift 63, reduce 27) on '|'
+105: shift/reduce conflict (shift 64, reduce 27) on '+'
+105: shift/reduce conflict (shift 65, reduce 27) on '-'
+105: shift/reduce conflict (shift 66, reduce 27) on '*'
+105: shift/reduce conflict (shift 67, reduce 27) on '/'
+105: shift/reduce conflict (shift 69, reduce 27) on '^'
+105: shift/reduce conflict (shift 70, reduce 27) on '<'
+105: shift/reduce conflict (shift 71, reduce 27) on '>'
+105: shift/reduce conflict (shift 72, reduce 27) on '%'
+state 105
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr '^' expr .  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+
+	OR  shift 54
+	AN  shift 55
+	EQ  shift 56
+	NE  shift 57
+	LE  shift 58
+	GE  shift 59
+	LS  shift 60
+	RS  shift 61
+	'&'  shift 62
+	'|'  shift 63
+	'+'  shift 64
+	'-'  shift 65
+	'*'  shift 66
+	'/'  shift 67
+	'^'  shift 69
+	'<'  shift 70
+	'>'  shift 71
+	'%'  shift 72
+	';'  reduce 27
+	')'  reduce 27
+
+
+106: shift/reduce conflict (shift 54, reduce 31) on OR
+106: shift/reduce conflict (shift 55, reduce 31) on AN
+106: shift/reduce conflict (shift 56, reduce 31) on EQ
+106: shift/reduce conflict (shift 57, reduce 31) on NE
+106: shift/reduce conflict (shift 58, reduce 31) on LE
+106: shift/reduce conflict (shift 59, reduce 31) on GE
+106: shift/reduce conflict (shift 60, reduce 31) on LS
+106: shift/reduce conflict (shift 61, reduce 31) on RS
+106: shift/reduce conflict (shift 62, reduce 31) on '&'
+106: shift/reduce conflict (shift 63, reduce 31) on '|'
+106: shift/reduce conflict (shift 64, reduce 31) on '+'
+106: shift/reduce conflict (shift 65, reduce 31) on '-'
+106: shift/reduce conflict (shift 66, reduce 31) on '*'
+106: shift/reduce conflict (shift 67, reduce 31) on '/'
+106: shift/reduce conflict (shift 69, reduce 31) on '^'
+106: shift/reduce conflict (shift 70, reduce 31) on '<'
+106: shift/reduce conflict (shift 71, reduce 31) on '>'
+106: shift/reduce conflict (shift 72, reduce 31) on '%'
+state 106
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr '<' expr .  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
 
 	OR  shift 54
 	AN  shift 55
@@ -3322,44 +3267,44 @@ state 107
 	')'  reduce 31
 
 
-108: shift/reduce conflict (shift 54, reduce 40) on OR
-108: shift/reduce conflict (shift 55, reduce 40) on AN
-108: shift/reduce conflict (shift 56, reduce 40) on EQ
-108: shift/reduce conflict (shift 57, reduce 40) on NE
-108: shift/reduce conflict (shift 58, reduce 40) on LE
-108: shift/reduce conflict (shift 59, reduce 40) on GE
-108: shift/reduce conflict (shift 60, reduce 40) on LS
-108: shift/reduce conflict (shift 61, reduce 40) on RS
-108: shift/reduce conflict (shift 62, reduce 40) on '&'
-108: shift/reduce conflict (shift 63, reduce 40) on '|'
-108: shift/reduce conflict (shift 64, reduce 40) on '+'
-108: shift/reduce conflict (shift 65, reduce 40) on '-'
-108: shift/reduce conflict (shift 66, reduce 40) on '*'
-108: shift/reduce conflict (shift 67, reduce 40) on '/'
-108: shift/reduce conflict (shift 69, reduce 40) on '^'
-108: shift/reduce conflict (shift 70, reduce 40) on '<'
-108: shift/reduce conflict (shift 71, reduce 40) on '>'
-108: shift/reduce conflict (shift 72, reduce 40) on '%'
-state 108
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-	expr : expr '%' expr .  (40)
+107: shift/reduce conflict (shift 54, reduce 32) on OR
+107: shift/reduce conflict (shift 55, reduce 32) on AN
+107: shift/reduce conflict (shift 56, reduce 32) on EQ
+107: shift/reduce conflict (shift 57, reduce 32) on NE
+107: shift/reduce conflict (shift 58, reduce 32) on LE
+107: shift/reduce conflict (shift 59, reduce 32) on GE
+107: shift/reduce conflict (shift 60, reduce 32) on LS
+107: shift/reduce conflict (shift 61, reduce 32) on RS
+107: shift/reduce conflict (shift 62, reduce 32) on '&'
+107: shift/reduce conflict (shift 63, reduce 32) on '|'
+107: shift/reduce conflict (shift 64, reduce 32) on '+'
+107: shift/reduce conflict (shift 65, reduce 32) on '-'
+107: shift/reduce conflict (shift 66, reduce 32) on '*'
+107: shift/reduce conflict (shift 67, reduce 32) on '/'
+107: shift/reduce conflict (shift 69, reduce 32) on '^'
+107: shift/reduce conflict (shift 70, reduce 32) on '<'
+107: shift/reduce conflict (shift 71, reduce 32) on '>'
+107: shift/reduce conflict (shift 72, reduce 32) on '%'
+state 107
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr '>' expr .  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
 
 	OR  shift 54
 	AN  shift 55
@@ -3379,82 +3324,116 @@ state 108
 	'<'  shift 70
 	'>'  shift 71
 	'%'  shift 72
-	';'  reduce 40
-	')'  reduce 40
+	';'  reduce 32
+	')'  reduce 32
+
+
+108: shift/reduce conflict (shift 54, reduce 41) on OR
+108: shift/reduce conflict (shift 55, reduce 41) on AN
+108: shift/reduce conflict (shift 56, reduce 41) on EQ
+108: shift/reduce conflict (shift 57, reduce 41) on NE
+108: shift/reduce conflict (shift 58, reduce 41) on LE
+108: shift/reduce conflict (shift 59, reduce 41) on GE
+108: shift/reduce conflict (shift 60, reduce 41) on LS
+108: shift/reduce conflict (shift 61, reduce 41) on RS
+108: shift/reduce conflict (shift 62, reduce 41) on '&'
+108: shift/reduce conflict (shift 63, reduce 41) on '|'
+108: shift/reduce conflict (shift 64, reduce 41) on '+'
+108: shift/reduce conflict (shift 65, reduce 41) on '-'
+108: shift/reduce conflict (shift 66, reduce 41) on '*'
+108: shift/reduce conflict (shift 67, reduce 41) on '/'
+108: shift/reduce conflict (shift 69, reduce 41) on '^'
+108: shift/reduce conflict (shift 70, reduce 41) on '<'
+108: shift/reduce conflict (shift 71, reduce 41) on '>'
+108: shift/reduce conflict (shift 72, reduce 41) on '%'
+state 108
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+	expr : expr '%' expr .  (41)
+
+	OR  shift 54
+	AN  shift 55
+	EQ  shift 56
+	NE  shift 57
+	LE  shift 58
+	GE  shift 59
+	LS  shift 60
+	RS  shift 61
+	'&'  shift 62
+	'|'  shift 63
+	'+'  shift 64
+	'-'  shift 65
+	'*'  shift 66
+	'/'  shift 67
+	'^'  shift 69
+	'<'  shift 70
+	'>'  shift 71
+	'%'  shift 72
+	';'  reduce 41
+	')'  reduce 41
 
 
 state 109
-	stmt : DO stmt WHILE '(' . expr ')' ';'  (7)
+	stmt : DO L stmt WHILE . '(' expr M N L ')' ';'  (8)
 
-	ID  shift 3
-	INT8  shift 4
-	INT16  shift 5
-	INT32  shift 6
-	FLT  shift 7
-	STR  shift 8
-	PP  shift 14
-	NN  shift 15
-	'+'  shift 16
-	'-'  shift 17
-	'!'  shift 18
-	'('  shift 20
-	'~'  shift 22
-	'$'  shift 23
+	'('  shift 113
 	.  error
-
-	expr  goto 113
 
 
 state 110
-	stmt : FOR '(' expr ';' . expr ';' expr ')' stmt  (8)
+	stmt : FOR '(' expr ';' . L expr M N ';' L expr N ')' L stmt N L  (9)
+	L : .  (58)
 
-	ID  shift 3
-	INT8  shift 4
-	INT16  shift 5
-	INT32  shift 6
-	FLT  shift 7
-	STR  shift 8
-	PP  shift 14
-	NN  shift 15
-	'+'  shift 16
-	'-'  shift 17
-	'!'  shift 18
-	'('  shift 20
-	'~'  shift 22
-	'$'  shift 23
-	.  error
+	.  reduce 58
 
-	expr  goto 114
+	L  goto 114
 
 
 state 111
 	stmt : IF '(' expr M . ')' stmt N ELSE L stmt L  (5)
+	stmt : IF '(' expr M . ')' stmt L  (6)
 
 	')'  shift 115
 	.  error
 
 
 state 112
-	stmt : WHILE '(' L expr . M ')' stmt N L  (6)
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
-	M : .  (58)
+	stmt : WHILE '(' L expr . M ')' stmt N L  (7)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+	M : .  (59)
 
 	OR  shift 54
 	AN  shift 55
@@ -3474,99 +3453,58 @@ state 112
 	'<'  shift 70
 	'>'  shift 71
 	'%'  shift 72
-	')'  reduce 58
+	')'  reduce 59
 
 	M  goto 116
 
 
 state 113
-	stmt : DO stmt WHILE '(' expr . ')' ';'  (7)
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+	stmt : DO L stmt WHILE '(' . expr M N L ')' ';'  (8)
 
-	OR  shift 54
-	AN  shift 55
-	EQ  shift 56
-	NE  shift 57
-	LE  shift 58
-	GE  shift 59
-	LS  shift 60
-	RS  shift 61
-	'&'  shift 62
-	'|'  shift 63
-	'+'  shift 64
-	'-'  shift 65
-	'*'  shift 66
-	'/'  shift 67
-	')'  shift 117
-	'^'  shift 69
-	'<'  shift 70
-	'>'  shift 71
-	'%'  shift 72
+	ID  shift 3
+	INT8  shift 4
+	INT16  shift 5
+	INT32  shift 6
+	FLT  shift 7
+	STR  shift 8
+	PP  shift 14
+	NN  shift 15
+	'+'  shift 16
+	'-'  shift 17
+	'!'  shift 18
+	'('  shift 20
+	'~'  shift 22
+	'$'  shift 23
 	.  error
+
+	expr  goto 117
 
 
 state 114
-	stmt : FOR '(' expr ';' expr . ';' expr ')' stmt  (8)
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+	stmt : FOR '(' expr ';' L . expr M N ';' L expr N ')' L stmt N L  (9)
 
-	OR  shift 54
-	AN  shift 55
-	EQ  shift 56
-	NE  shift 57
-	LE  shift 58
-	GE  shift 59
-	LS  shift 60
-	RS  shift 61
-	'&'  shift 62
-	'|'  shift 63
-	'+'  shift 64
-	'-'  shift 65
-	'*'  shift 66
-	'/'  shift 67
-	';'  shift 118
-	'^'  shift 69
-	'<'  shift 70
-	'>'  shift 71
-	'%'  shift 72
+	ID  shift 3
+	INT8  shift 4
+	INT16  shift 5
+	INT32  shift 6
+	FLT  shift 7
+	STR  shift 8
+	PP  shift 14
+	NN  shift 15
+	'+'  shift 16
+	'-'  shift 17
+	'!'  shift 18
+	'('  shift 20
+	'~'  shift 22
+	'$'  shift 23
 	.  error
+
+	expr  goto 118
 
 
 state 115
 	stmt : IF '(' expr M ')' . stmt N ELSE L stmt L  (5)
+	stmt : IF '(' expr M ')' . stmt L  (6)
 
 	error  shift 2
 	ID  shift 3
@@ -3597,107 +3535,33 @@ state 115
 
 
 state 116
-	stmt : WHILE '(' L expr M . ')' stmt N L  (6)
+	stmt : WHILE '(' L expr M . ')' stmt N L  (7)
 
 	')'  shift 120
 	.  error
 
 
 state 117
-	stmt : DO stmt WHILE '(' expr ')' . ';'  (7)
-
-	';'  shift 121
-	.  error
-
-
-state 118
-	stmt : FOR '(' expr ';' expr ';' . expr ')' stmt  (8)
-
-	ID  shift 3
-	INT8  shift 4
-	INT16  shift 5
-	INT32  shift 6
-	FLT  shift 7
-	STR  shift 8
-	PP  shift 14
-	NN  shift 15
-	'+'  shift 16
-	'-'  shift 17
-	'!'  shift 18
-	'('  shift 20
-	'~'  shift 22
-	'$'  shift 23
-	.  error
-
-	expr  goto 122
-
-
-state 119
-	stmt : IF '(' expr M ')' stmt . N ELSE L stmt L  (5)
-	N : .  (59)
-
-	.  reduce 59
-
-	N  goto 123
-
-
-state 120
-	stmt : WHILE '(' L expr M ')' . stmt N L  (6)
-
-	error  shift 2
-	ID  shift 3
-	INT8  shift 4
-	INT16  shift 5
-	INT32  shift 6
-	FLT  shift 7
-	STR  shift 8
-	DO  shift 9
-	FOR  shift 10
-	IF  shift 11
-	RETURN  shift 12
-	WHILE  shift 13
-	PP  shift 14
-	NN  shift 15
-	'+'  shift 16
-	'-'  shift 17
-	'!'  shift 18
-	';'  shift 19
-	'('  shift 20
-	'{'  shift 21
-	'~'  shift 22
-	'$'  shift 23
-	.  error
-
-	stmt  goto 124
-	expr  goto 25
-
-
-state 121
-	stmt : DO stmt WHILE '(' expr ')' ';' .  (7)
-
-	.  reduce 7
-
-
-state 122
-	stmt : FOR '(' expr ';' expr ';' expr . ')' stmt  (8)
-	expr : expr . OR expr  (23)
-	expr : expr . AN expr  (24)
-	expr : expr . '|' expr  (25)
-	expr : expr . '^' expr  (26)
-	expr : expr . '&' expr  (27)
-	expr : expr . EQ expr  (28)
-	expr : expr . NE expr  (29)
-	expr : expr . '<' expr  (30)
-	expr : expr . '>' expr  (31)
-	expr : expr . LE expr  (32)
-	expr : expr . GE expr  (33)
-	expr : expr . LS expr  (34)
-	expr : expr . RS expr  (35)
-	expr : expr . '+' expr  (36)
-	expr : expr . '-' expr  (37)
-	expr : expr . '*' expr  (38)
-	expr : expr . '/' expr  (39)
-	expr : expr . '%' expr  (40)
+	stmt : DO L stmt WHILE '(' expr . M N L ')' ';'  (8)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+	M : .  (59)
 
 	OR  shift 54
 	AN  shift 55
@@ -3713,32 +3577,75 @@ state 122
 	'-'  shift 65
 	'*'  shift 66
 	'/'  shift 67
-	')'  shift 125
 	'^'  shift 69
 	'<'  shift 70
 	'>'  shift 71
 	'%'  shift 72
-	.  error
+	')'  reduce 59
+
+	M  goto 121
 
 
-state 123
-	stmt : IF '(' expr M ')' stmt N . ELSE L stmt L  (5)
+state 118
+	stmt : FOR '(' expr ';' L expr . M N ';' L expr N ')' L stmt N L  (9)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+	M : .  (59)
 
-	ELSE  shift 126
-	.  error
+	OR  shift 54
+	AN  shift 55
+	EQ  shift 56
+	NE  shift 57
+	LE  shift 58
+	GE  shift 59
+	LS  shift 60
+	RS  shift 61
+	'&'  shift 62
+	'|'  shift 63
+	'+'  shift 64
+	'-'  shift 65
+	'*'  shift 66
+	'/'  shift 67
+	'^'  shift 69
+	'<'  shift 70
+	'>'  shift 71
+	'%'  shift 72
+	';'  reduce 59
+
+	M  goto 122
 
 
-state 124
-	stmt : WHILE '(' L expr M ')' stmt . N L  (6)
-	N : .  (59)
+119: reduce/reduce conflict (reduce 58, reduce 60) on ELSE
+state 119
+	stmt : IF '(' expr M ')' stmt . N ELSE L stmt L  (5)
+	stmt : IF '(' expr M ')' stmt . L  (6)
+	L : .  (58)
+	N : .  (60)
 
-	.  reduce 59
+	.  reduce 58
 
-	N  goto 127
+	L  goto 123
+	N  goto 124
 
 
-state 125
-	stmt : FOR '(' expr ';' expr ';' expr ')' . stmt  (8)
+state 120
+	stmt : WHILE '(' L expr M ')' . stmt N L  (7)
 
 	error  shift 2
 	ID  shift 3
@@ -3764,35 +3671,101 @@ state 125
 	'$'  shift 23
 	.  error
 
-	stmt  goto 128
+	stmt  goto 125
 	expr  goto 25
 
 
+state 121
+	stmt : DO L stmt WHILE '(' expr M . N L ')' ';'  (8)
+	N : .  (60)
+
+	.  reduce 60
+
+	N  goto 126
+
+
+state 122
+	stmt : FOR '(' expr ';' L expr M . N ';' L expr N ')' L stmt N L  (9)
+	N : .  (60)
+
+	.  reduce 60
+
+	N  goto 127
+
+
+state 123
+	stmt : IF '(' expr M ')' stmt L .  (6)
+
+	.  reduce 6
+
+
+state 124
+	stmt : IF '(' expr M ')' stmt N . ELSE L stmt L  (5)
+
+	ELSE  shift 128
+	.  error
+
+
+state 125
+	stmt : WHILE '(' L expr M ')' stmt . N L  (7)
+	N : .  (60)
+
+	.  reduce 60
+
+	N  goto 129
+
+
 state 126
-	stmt : IF '(' expr M ')' stmt N ELSE . L stmt L  (5)
-	L : .  (57)
+	stmt : DO L stmt WHILE '(' expr M N . L ')' ';'  (8)
+	L : .  (58)
 
-	.  reduce 57
-
-	L  goto 129
-
-
-state 127
-	stmt : WHILE '(' L expr M ')' stmt N . L  (6)
-	L : .  (57)
-
-	.  reduce 57
+	.  reduce 58
 
 	L  goto 130
 
 
-state 128
-	stmt : FOR '(' expr ';' expr ';' expr ')' stmt .  (8)
+state 127
+	stmt : FOR '(' expr ';' L expr M N . ';' L expr N ')' L stmt N L  (9)
 
-	.  reduce 8
+	';'  shift 131
+	.  error
+
+
+state 128
+	stmt : IF '(' expr M ')' stmt N ELSE . L stmt L  (5)
+	L : .  (58)
+
+	.  reduce 58
+
+	L  goto 132
 
 
 state 129
+	stmt : WHILE '(' L expr M ')' stmt N . L  (7)
+	L : .  (58)
+
+	.  reduce 58
+
+	L  goto 133
+
+
+state 130
+	stmt : DO L stmt WHILE '(' expr M N L . ')' ';'  (8)
+
+	')'  shift 134
+	.  error
+
+
+state 131
+	stmt : FOR '(' expr ';' L expr M N ';' . L expr N ')' L stmt N L  (9)
+	L : .  (58)
+
+	.  reduce 58
+
+	L  goto 135
+
+
+state 132
 	stmt : IF '(' expr M ')' stmt N ELSE L . stmt L  (5)
 
 	error  shift 2
@@ -3819,29 +3792,180 @@ state 129
 	'$'  shift 23
 	.  error
 
-	stmt  goto 131
+	stmt  goto 136
 	expr  goto 25
 
 
-state 130
-	stmt : WHILE '(' L expr M ')' stmt N L .  (6)
+state 133
+	stmt : WHILE '(' L expr M ')' stmt N L .  (7)
 
-	.  reduce 6
+	.  reduce 7
 
 
-state 131
+state 134
+	stmt : DO L stmt WHILE '(' expr M N L ')' . ';'  (8)
+
+	';'  shift 137
+	.  error
+
+
+state 135
+	stmt : FOR '(' expr ';' L expr M N ';' L . expr N ')' L stmt N L  (9)
+
+	ID  shift 3
+	INT8  shift 4
+	INT16  shift 5
+	INT32  shift 6
+	FLT  shift 7
+	STR  shift 8
+	PP  shift 14
+	NN  shift 15
+	'+'  shift 16
+	'-'  shift 17
+	'!'  shift 18
+	'('  shift 20
+	'~'  shift 22
+	'$'  shift 23
+	.  error
+
+	expr  goto 138
+
+
+state 136
 	stmt : IF '(' expr M ')' stmt N ELSE L stmt . L  (5)
-	L : .  (57)
+	L : .  (58)
 
-	.  reduce 57
+	.  reduce 58
 
-	L  goto 132
+	L  goto 139
 
 
-state 132
+state 137
+	stmt : DO L stmt WHILE '(' expr M N L ')' ';' .  (8)
+
+	.  reduce 8
+
+
+state 138
+	stmt : FOR '(' expr ';' L expr M N ';' L expr . N ')' L stmt N L  (9)
+	expr : expr . OR expr  (24)
+	expr : expr . AN expr  (25)
+	expr : expr . '|' expr  (26)
+	expr : expr . '^' expr  (27)
+	expr : expr . '&' expr  (28)
+	expr : expr . EQ expr  (29)
+	expr : expr . NE expr  (30)
+	expr : expr . '<' expr  (31)
+	expr : expr . '>' expr  (32)
+	expr : expr . LE expr  (33)
+	expr : expr . GE expr  (34)
+	expr : expr . LS expr  (35)
+	expr : expr . RS expr  (36)
+	expr : expr . '+' expr  (37)
+	expr : expr . '-' expr  (38)
+	expr : expr . '*' expr  (39)
+	expr : expr . '/' expr  (40)
+	expr : expr . '%' expr  (41)
+	N : .  (60)
+
+	OR  shift 54
+	AN  shift 55
+	EQ  shift 56
+	NE  shift 57
+	LE  shift 58
+	GE  shift 59
+	LS  shift 60
+	RS  shift 61
+	'&'  shift 62
+	'|'  shift 63
+	'+'  shift 64
+	'-'  shift 65
+	'*'  shift 66
+	'/'  shift 67
+	'^'  shift 69
+	'<'  shift 70
+	'>'  shift 71
+	'%'  shift 72
+	')'  reduce 60
+
+	N  goto 140
+
+
+state 139
 	stmt : IF '(' expr M ')' stmt N ELSE L stmt L .  (5)
 
 	.  reduce 5
+
+
+state 140
+	stmt : FOR '(' expr ';' L expr M N ';' L expr N . ')' L stmt N L  (9)
+
+	')'  shift 141
+	.  error
+
+
+state 141
+	stmt : FOR '(' expr ';' L expr M N ';' L expr N ')' . L stmt N L  (9)
+	L : .  (58)
+
+	.  reduce 58
+
+	L  goto 142
+
+
+state 142
+	stmt : FOR '(' expr ';' L expr M N ';' L expr N ')' L . stmt N L  (9)
+
+	error  shift 2
+	ID  shift 3
+	INT8  shift 4
+	INT16  shift 5
+	INT32  shift 6
+	FLT  shift 7
+	STR  shift 8
+	DO  shift 9
+	FOR  shift 10
+	IF  shift 11
+	RETURN  shift 12
+	WHILE  shift 13
+	PP  shift 14
+	NN  shift 15
+	'+'  shift 16
+	'-'  shift 17
+	'!'  shift 18
+	';'  shift 19
+	'('  shift 20
+	'{'  shift 21
+	'~'  shift 22
+	'$'  shift 23
+	.  error
+
+	stmt  goto 143
+	expr  goto 25
+
+
+state 143
+	stmt : FOR '(' expr ';' L expr M N ';' L expr N ')' L stmt . N L  (9)
+	N : .  (60)
+
+	.  reduce 60
+
+	N  goto 144
+
+
+state 144
+	stmt : FOR '(' expr ';' L expr M N ';' L expr N ')' L stmt N . L  (9)
+	L : .  (58)
+
+	.  reduce 58
+
+	L  goto 145
+
+
+state 145
+	stmt : FOR '(' expr ';' L expr M N ';' L expr N ')' L stmt N L .  (9)
+
+	.  reduce 9
 
 
 State 47 contains 10 shift/reduce conflicts.
@@ -3877,7 +4001,8 @@ State 105 contains 18 shift/reduce conflicts.
 State 106 contains 18 shift/reduce conflicts.
 State 107 contains 18 shift/reduce conflicts.
 State 108 contains 18 shift/reduce conflicts.
+State 119 contains 1 reduce/reduce conflict.
 
 
 54 terminals, 7 nonterminals
-60 grammar rules, 133 states
+61 grammar rules, 146 states

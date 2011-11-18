@@ -52,17 +52,24 @@ stmts   : stmts stmt
 stmt    : ';'
         | expr ';'      { emit(pop); /* does not leave a value on the stack */ }
         | IF '(' expr M ')' stmt N ELSE L stmt L
-                        { backpatch($4, $9 - $4); backpatch($7, $11 - $7);   }
-/*
+                        { backpatch($4, $9 - $4); 
+						  backpatch($7, $11 - $7);   }
+
         | IF '(' expr M ')' stmt L
-                        { backpatch($4, $7 - $4); }
-*/
+                        { backpatch($4, $7 - $4); 
+	//					  backpatch($7, $8 - $7);
+						}
         | WHILE '(' L expr M ')' stmt N L
                         { backpatch($5, $9 - $5); backpatch($8, $3 - $8); }
-        | DO stmt WHILE '(' expr ')' ';'
-               			{ }
-        | FOR '(' expr ';' expr ';' expr ')' stmt
-                        { }
+        | DO L stmt WHILE '(' expr M N L ')' ';'
+               			{ backpatch($7, $9 - $7); backpatch($8, $2 - $8); }
+        | FOR '(' expr ';' L expr M N ';' L expr N ')' L stmt N L
+                        {
+						  backpatch($7, $17 - $7);
+						  backpatch($8, $14 - $8);
+						  backpatch($12, $5 - $12);
+						  backpatch($16, $10 - $16);
+						}
         | RETURN expr ';'
                         { emit(istore_2); /* return val goes in local var 2 */ }
         | '{' stmts '}'
